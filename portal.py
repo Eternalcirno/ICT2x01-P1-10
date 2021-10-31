@@ -14,18 +14,22 @@ def admin():
 @app.route("/auth", methods=["POST"])
 def login():
    # ???
+   pass
 
 @app.route("/changespeed", methods=["POST"])
 def cspeed():
    # ???
+   pass
 
 @app.route("/changedist", methods=["POST"])
 def cdist():
    # ???
+   pass
 
 @app.route("/changepass", methods=["POST"])
 def cpass():
    # ???
+   pass
 
 if __name__ == "__main__":
     app.run()
