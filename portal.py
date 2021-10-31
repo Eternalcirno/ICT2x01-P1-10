@@ -16,15 +16,15 @@ def login():
    # ???
 
 @app.route("/changespeed", methods=["POST"])
-def login():
+def cspeed():
    # ???
 
 @app.route("/changedist", methods=["POST"])
-def login():
+def cdist():
    # ???
 
 @app.route("/changepass", methods=["POST"])
-def login():
+def cpass():
    # ???
 
 if __name__ == "__main__":
