@@ -13,23 +13,23 @@ def admin():
 
 @app.route("/auth", methods=["POST"])
 def login():
+    pass
    # ???
-   pass
 
 @app.route("/changespeed", methods=["POST"])
 def cspeed():
+    pass
    # ???
-   pass
 
 @app.route("/changedist", methods=["POST"])
 def cdist():
+    pass
    # ???
-   pass
 
 @app.route("/changepass", methods=["POST"])
 def cpass():
+    pass
    # ???
-   pass
 
 if __name__ == "__main__":
     app.run()
