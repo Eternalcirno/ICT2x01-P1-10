@@ -1,6 +1,5 @@
 
 <div id="top"></div>
-# ICT2x01-P1-10
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -11,7 +10,7 @@
 <h3 align="center">CRUSH GEAR</h3>
 
   <p align="center">
-    project_description
+    ICT2x01-P1-10 Project
     <br />
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
