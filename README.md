@@ -1,6 +1,6 @@
 
 <div id="top"></div>
-<!-- PROJECT LOGO -->
+<!-- PROJECT LOGO r-->
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
