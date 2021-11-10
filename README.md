@@ -1,5 +1,5 @@
 
-<div id="top">hi</div>
+<div id="top"></div>
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
