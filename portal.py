@@ -22,6 +22,10 @@ def homepage():
 def admin():
     return render_template("./admin.html")
 
+@app.route("/dashboard", methods=["GET","POST"])
+def dashboard():
+    return render_template("./dashboard.html")
+
 @app.route("/auth", methods=["POST"])
 def login():
     pass
@@ -58,4 +62,4 @@ def cpass():
         return "password successfully changed"
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
