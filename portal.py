@@ -13,10 +13,10 @@ print(passwd)
 
 app = Flask(__name__)
 
-@app.route("/",methods=["GET"])
-def homepage():
-    print()
-    return render_template("./index.html")
+#@app.route("/",methods=["GET"])
+#def adminpage():
+ #   print()
+  #  return render_template("./index.html")
 
 @app.route("/admin", methods=["GET"])
 def admin():
@@ -56,6 +56,24 @@ def cpass():
         global config 
         config = dotenv.dotenv_values(dotenv_file)
         return "password successfully changed"
+
+
+@app.route('/')
+def index(app_data=None):
+    return render_template('homepage.html', app_data=app_data)
+
+
+@app.route('/dashboard')
+def dashboard(app_data=None):
+    return render_template('dashboard.html', app_data=app_data)
+
+@app.route('/control')
+def control(app_data=None):
+    return render_template('control.html', app_data=app_data)
+
+
+
+
 
 if __name__ == "__main__":
     app.run()
