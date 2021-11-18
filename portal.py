@@ -27,6 +27,11 @@ def homepage():
 def admin():
     return render_template("./admin.html")
 
+@app.route("/logout", methods=["GET"])
+def logout():
+    session.pop('auth', None)
+    return render_template("./admin.html")
+
 @app.route("/auth", methods=["POST"])
 def login():
     now = time.time()
@@ -45,7 +50,9 @@ def login():
         return "Password cannot be empty"
     if(user == uname and hpassword == passwd):
         flash("Successfully logged in")
-        return render_template("./panel.html")
+        resp = make_response(render_template("./panel.html"))
+        session["auth"] = "1"
+        return resp
     if(user != uname or hpassword != passwd):
         if(ratelimit >= 5 and banned == False):
             btime = time.time()
@@ -66,6 +73,12 @@ def cdist():
 
 @app.route("/changepass", methods=["GET","POST"])
 def cpass():
+    try:
+        cookie = session["auth"]
+    except:
+        return render_template("./admin.html")
+    if(cookie == None):
+        return render_template("./admin.html")
     if(request.method == "GET"):
         return render_template("./changepass.html")
     print(request.form)
