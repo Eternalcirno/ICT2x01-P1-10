@@ -29,7 +29,7 @@ def admin():
 
 @app.route("/logout", methods=["GET"])
 def logout():
-    session.pop('auth', None)
+    session.clear()
     return render_template("./admin.html")
 
 @app.route("/auth", methods=["POST"])
