@@ -26,6 +26,10 @@ def admin():
 def dashboard():
     return render_template("./dashboard.html")
 
+@app.route("/play", methods=["GET","POST"])
+def play():
+    return render_template("./play.html")
+
 @app.route("/auth", methods=["POST"])
 def login():
     pass

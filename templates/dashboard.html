@@ -12,48 +12,31 @@
 
 </head>
 <body>
+<header>
+<h1>Dashboard</h1>
+</header>
 <div class="container">
     <div class="col">
         <div class="row">
-            <div id="tester1" style="width:600px;height:250px;"></div>
-            <script>
-                function rand() {
-    return Math.random();
-}
-
-Plotly.newPlot('tester1', [{
-    y: [1,2,3].map(rand),
-    mode: 'lines',
-    line: {color: '#80CAF6'}
-}]);
-
-var cnt = 0;
-
-var interval = setInterval(function() {
-
-    Plotly.extendTraces('tester1', {
-        y: [[rand()]]
-    }, [0])
-
-    if(++cnt === 100) clearInterval(interval);
-}, 300);
-
-
-            </script>
+            <div id="tester1"style="width:600px;height:250px;"></div>
+            <div><h1>IR Sensor</h1></div>
         </div>
         <div class="row">
             <div id="tester2" style="width:600px;height:250px;"></div>
-             <script>
+            <div><h1>Ultra Sonic Sensor</h1></div>
+        </div>
+        <div class="row">
+            <div id="tester3" style="width:600px;height:250px;"></div>
+            <div><h1>Speed</h1></div>
+            <script>
                 function rand() {
     return Math.random();
-}
-
+    }
 Plotly.newPlot('tester2', [{
     y: [1,2,3].map(rand),
     mode: 'lines',
-    line: {color: '#80CAF6'}
+    line: {color: 'black'}
 }]);
-
 var cnt = 0;
 
 var interval = setInterval(function() {
@@ -64,19 +47,10 @@ var interval = setInterval(function() {
 
     if(++cnt === 100) clearInterval(interval);
 }, 300);
-
-
             </script>
-        </div>
-        <div class="row">
-            <div id="tester3" style="width:600px;height:250px;"></div>
-        </div>
-        <div class="row">
-            <div id="tester4" style="width:600px;height:250px;"></div>
         </div>
     </div>
 </div>
-
-
+<script src="static/js/dashboard.js"></script>
 </body>
 </html>
