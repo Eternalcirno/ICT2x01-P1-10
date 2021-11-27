@@ -14,20 +14,38 @@
 <body>
 <header>
 <h1>Dashboard</h1>
+    <a href="/play">Play</a>
 </header>
 <div class="container">
     <div class="col">
         <div class="row">
-            <div id="tester1"style="width:600px;height:250px;"></div>
             <div><h1>IR Sensor</h1></div>
+            <div id="tester1"style="width:600px;height:250px;"></div>
+            <script>
+
+                function rand() {
+    return Math.random();
+    }
+Plotly.newPlot('tester1', [{
+    y: [1,2,3].map(rand),
+    mode: 'lines',
+    line: {color: 'black'}
+}]);
+var cnt = 0;
+
+var interval = setInterval(function() {
+
+    Plotly.extendTraces('tester1', {
+        y: [[rand()]]
+    }, [0])
+
+    if(++cnt === 100) clearInterval(interval);
+}, 300);
+            </script>
         </div>
         <div class="row">
-            <div id="tester2" style="width:600px;height:250px;"></div>
             <div><h1>Ultra Sonic Sensor</h1></div>
-        </div>
-        <div class="row">
-            <div id="tester3" style="width:600px;height:250px;"></div>
-            <div><h1>Speed</h1></div>
+            <div id="tester2" style="width:600px;height:250px;"></div>
             <script>
                 function rand() {
     return Math.random();
@@ -49,8 +67,33 @@ var interval = setInterval(function() {
 }, 300);
             </script>
         </div>
+        <div class="row">
+            <div><h1>Speed</h1></div>
+            <div id="tester3" style="width:600px;height:250px;"></div>
+            <script>
+                function rand() {
+    return Math.random();
+    }
+Plotly.newPlot('tester3', [{
+    y: [1,2,3].map(rand),
+    mode: 'lines',
+    line: {color: 'black'}
+}]);
+var cnt = 0;
+
+var interval = setInterval(function() {
+
+    Plotly.extendTraces('tester3', {
+        y: [[rand()]]
+    }, [0])
+
+    if(++cnt === 100) clearInterval(interval);
+}, 300);
+            </script>
+
+        </div>
     </div>
 </div>
-<script src="static/js/dashboard.js"></script>
+<!-- <script src="static/js/dashboard.js"></script> -->
 </body>
 </html>
