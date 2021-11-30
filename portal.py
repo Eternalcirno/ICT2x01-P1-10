@@ -6,6 +6,17 @@ import time
 import re
 import secrets
 import hashlib
+import json
+import os
+import sqlite3 as sql
+
+conn = sql.connect('database.db')
+print("Opened database successfully")
+
+conn.execute('CREATE TABLE IF NOT EXISTS data_table (data TEXT)')
+#conn.execute('DROP TABLE data_table')
+#print("Table created successfully")
+conn.close()
 
 dotenv_file = dotenv.find_dotenv()
 dotenv.load_dotenv(dotenv_file)
@@ -24,9 +35,24 @@ def homepage():
     print()
     return render_template("./index.html")
 
-@app.route("/admin", methods=["GET"])
+@app.route("/admin", methods=["GET","POST","PUT"])
 def admin():
-    return render_template("./admin.html")
+    test = 0
+    if request.method == 'POST':  # this block is only entered when the form is submitted
+        test = request.args.get('test')
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
+            #cur.execute("INSERT INTO data_table(data) VALUES (0)")
+            cur.execute('UPDATE data_table SET data=? WHERE rowid=1',(test,))
+            con.commit()
+            msg = "Record successfully added"
+
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        cur.execute("select * from data_table")
+        row = cur.fetchone()
+        data = row[0]
+    return render_template("./admin.html",data=data)
 
 @app.route("/logout", methods=["GET"])
 def logout():
@@ -118,4 +144,4 @@ def cpass():
         return "password successfully changed"
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=80)
