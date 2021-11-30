@@ -7,13 +7,19 @@
     <script src="static/js/blocks_compressed.js"></script>
     <script src="static/js/en.js"></script>
     <script src="static/js/javascript_compressed.js"></script>
+    <script src="static/js/python_compressed.js"></script>
 </head>
 <body>
 <div>
     <h1>PLAY</h1>
 
 </div>
-<div id="blocklyDiv" style="height: 480px; width: 600px;"><p id="textarea">test</p></div>
+<div id="blocklyDiv" style="height: 480px; width: 600px;"><p id="textarea">test</p>
+    <form method="POST">
+        <button type="submit" value="Submit" onclick="run()"> RunMe </button>
+    </form>
+
+</div>
 <xml id="toolbox" style="display: none">
   <block type="controls_if"></block>
   <block type="controls_repeat_ext"></block>
@@ -36,9 +42,9 @@
     this.setHelpUrl('http://www.example.com/');
   }
 };
-    Blockly.JavaScript['move_forward'] = function(block) {
+    Blockly.Python['move_forward'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
+  var code = "+'1'";
   return code;
 };
 
@@ -53,9 +59,9 @@
     this.setHelpUrl('http://www.example.com/');
   }
 };
-    Blockly.JavaScript['move_backward'] = function(block) {
+    Blockly.Python['move_backward'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
+  var code = "+'2'";
   return code;
 };
 
@@ -70,9 +76,9 @@
     this.setHelpUrl('http://www.example.com/');
   }
 };
-    Blockly.JavaScript['turn_left'] = function(block) {
+    Blockly.Python['turn_left'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
+  var code = "+'3'";
   return code;
 };
 
@@ -87,9 +93,9 @@
     this.setHelpUrl('http://www.example.com/');
   }
 };
-        Blockly.JavaScript['turn_left'] = function(block) {
+        Blockly.Python['turn_right'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
+  var code = "+'4'";
   return code;
 };
   var workspace = Blockly.inject('blocklyDiv',
@@ -100,6 +106,16 @@
       document.getElementById('textarea').value = Blockly.JavaScript.workspaceToCode(workspace);
   }
   workspace.addChangeListener(myUpdateFunction);
+
+  var run = function() {
+      Blockly.Python.addReservedWords('code');
+      var code = Blockly.Python.workspaceToCode(workspace);
+
+      // now what do you do want to do with code...?
+      $.post("./play", {javascript_data: code});
+  }
+
+
 </script>
 </body>
 

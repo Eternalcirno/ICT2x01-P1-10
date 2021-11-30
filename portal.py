@@ -28,6 +28,9 @@ def dashboard():
 
 @app.route("/play", methods=["GET","POST"])
 def play():
+    if (request.method == "POST"):
+        commands = request.form['javascript_data']
+        print(commands)
     return render_template("./play.html")
 
 @app.route("/auth", methods=["POST"])
