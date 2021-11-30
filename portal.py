@@ -13,7 +13,14 @@ import sqlite3 as sql
 conn = sql.connect('database.db')
 print("Opened database successfully")
 
-conn.execute('CREATE TABLE IF NOT EXISTS data_table (data TEXT)')
+conn.execute('CREATE TABLE IF NOT EXISTS speed_table (data TEXT)')
+conn.execute('CREATE TABLE IF NOT EXISTS line_table (data TEXT)')
+conn.execute('CREATE TABLE IF NOT EXISTS distance_table (data TEXT)')
+# with sql.connect("database.db") as con:
+#     cur = con.cursor()
+#     cur.execute('INSERT INTO speed_table(data) VALUES(0)')
+#     cur.execute('INSERT INTO line_table(data) VALUES(0)')
+#     cur.execute('INSERT INTO distance_table(data) VALUES(0)')
 #conn.execute('DROP TABLE data_table')
 #print("Table created successfully")
 conn.close()
@@ -35,24 +42,44 @@ def homepage():
     print()
     return render_template("./index.html")
 
-@app.route("/admin", methods=["GET","POST","PUT"])
-def admin():
-    test = 0
+@app.route("/data",methods=["GET","POST"])
+def data():
     if request.method == 'POST':  # this block is only entered when the form is submitted
-        test = request.args.get('test')
+        speed = request.args.get('speed')
+        line = request.args.get('line')
+        distance = request.args.get('distance')
         with sql.connect("database.db") as con:
             cur = con.cursor()
-            #cur.execute("INSERT INTO data_table(data) VALUES (0)")
-            cur.execute('UPDATE data_table SET data=? WHERE rowid=1',(test,))
+            if speed is not None:
+                cur.execute('UPDATE speed_table SET data=? WHERE rowid=1',(speed,))
+            if line is not None:
+                cur.execute('UPDATE line_table SET data=? WHERE rowid=1', (line,))
+            if distance is not None:
+                cur.execute('UPDATE distance_table SET data=? WHERE rowid=1', (distance,))
             con.commit()
-            msg = "Record successfully added"
 
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        cur.execute("select * from data_table")
+        cur.execute("select * from speed_table")
         row = cur.fetchone()
-        data = row[0]
-    return render_template("./admin.html",data=data)
+        speed = row[0]
+        cur.execute("select * from line_table")
+        row = cur.fetchone()
+        line = row[0]
+        cur.execute("select * from distance_table")
+        row = cur.fetchone()
+        distance = row[0]
+
+    return render_template("./data.html",speed=speed,line=line,distance=distance)
+
+@app.route("/commands", methods=["GET"])
+def commands():
+    command = str(123456)
+    return render_template("./commands.html",command=command)
+
+@app.route("/admin", methods=["GET"])
+def admin():
+    return render_template("./admin.html")
 
 @app.route("/logout", methods=["GET"])
 def logout():
