@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% extends 'layout.html' %} {% block title %} Homepage {% endblock %} {% block page_title %} Home {% endblock %} {% block body %}
+
 <html lang="en">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -23,6 +25,9 @@
     .w12-container {
         padding: 0.01em 16px!important;
     }
+
+
+
 </style>
 <head>
     <!-- Write your comments here -->
@@ -36,33 +41,14 @@
 
 </head>
 <!-- <script src="static/js/dashboard.js"></script> -->
-<body class="w3-content" style="max-width:100%">
-{% include 'navbar.html' %}
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
-    <!-- Push down content on small screens -->
-    <div class="w3-hide-large" style="margin-top:83px"></div>
-
-    <!-- Top header -->
-    <header class="w3-container w3-xlarge">
-        <p class="w3-left">{% block page_title %}{% endblock %}</p>
-        <p class="w3-right">
-            <i class="fa fa-user w3-margin-right"></i>
-            <i class="fa fa-search"></i>
-        </p>
-    </header>
-
-    <!-- Product grid -->
-    <div class="w12-row w3-grayscale">
-        <div class="w12-col l3 s6">
-            <div class="w12-container">
-                {% block body %} {% endblock %}
-                <div class="container">
-                    <div class="col">
-                        <div class="row">
-                            <div><h1>IR Sensor</h1></div>
-                            <div id="tester1" style="width:600px;height:250px;"></div>
-                            <script>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div><h1>IR Sensor</h1></div>
+                <div id="tester1" style="width:600px;height:250px;"></div>
+                <script>
 
                 function rand() {
     return Math.random();
@@ -87,12 +73,15 @@ var interval = setInterval(function() {
 
 
 
-                            </script>
-                        </div>
-                        <div class="row">
-                            <div><h1>Ultra Sonic Sensor</h1></div>
-                            <div id="tester2" style="width:600px;height:250px;"></div>
-                            <script>
+
+
+
+                </script>
+            </div>
+            <div class="row">
+                <div><h1>Ultra Sonic Sensor</h1></div>
+                <div id="tester2" style="width:600px;height:250px;"></div>
+                <script>
                 function rand() {
     return Math.random();
     }
@@ -116,12 +105,17 @@ var interval = setInterval(function() {
 
 
 
-                            </script>
-                        </div>
-                        <div class="row">
-                            <div><h1>Speed</h1></div>
-                            <div id="tester3" style="width:600px;height:250px;"></div>
-                            <script>
+
+
+
+                </script>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div><h1>Speed</h1></div>
+                <div id="tester3" style="width:600px;height:250px;"></div>
+                <script>
                 function rand() {
     return Math.random();
     }
@@ -145,45 +139,15 @@ var interval = setInterval(function() {
 
 
 
-                            </script>
-                        </div>
-                    </div>
-                    <!-- End page content -->
-                    <script>
-            // Accordion
-            function myAccFunc() {
-                var x = document.getElementById("demoAcc");
-                if (x.className.indexOf("w3-show") == -1) {
-                    x.className += " w3-show";
-                } else {
-                    x.className = x.className.replace(" w3-show", "");
-                }
-            }
-
-            // Click on the "Jeans" link on page load to open the accordion for demo purposes
-            document.getElementById("myBtn").click();
-
-
-            // Open and close sidebar
-            function w3_open() {
-                document.getElementById("mySidebar").style.display = "block";
-                document.getElementById("myOverlay").style.display = "block";
-            }
-
-            function w3_close() {
-                document.getElementById("mySidebar").style.display = "none";
-                document.getElementById("myOverlay").style.display = "none";
-            }
 
 
 
-
-
-                    </script>
-                </div>
+                </script>
             </div>
         </div>
     </div>
+
 </div>
 </body>
 </html>
+{% endblock %}
