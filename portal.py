@@ -3,13 +3,13 @@ from markupsafe import Markup
 from decouple import config
 import dotenv
 import re
+import json
 
 dotenv_file = dotenv.find_dotenv()
 dotenv.load_dotenv(dotenv_file)
 config = dotenv.dotenv_values(dotenv_file)
 uname = config["UNAME"]
 passwd = config["PASS"]
-print(passwd)
 
 app = Flask(__name__)
 
@@ -29,8 +29,11 @@ def dashboard():
 @app.route("/play", methods=["GET","POST"])
 def play():
     if (request.method == "POST"):
-        commands = request.form['javascript_data']
-        print(commands)
+        cmds = request.get_json()['data']
+        cmda = cmds.split("+")
+        for i in cmda:
+            #do robot stuff
+            pass
     return render_template("./play.html")
 
 @app.route("/auth", methods=["POST"])
