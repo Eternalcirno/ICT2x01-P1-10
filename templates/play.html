@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-{% extends 'layout.html' %} {% block title %} Homepage {% endblock %} {% block page_title %} Home {% endblock %} {% block body %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="static/js/jquery-3.6.0.min.js"></script>
     <script src="static/js/blockly_compressed.js"></script>
     <script src="static/js/blocks_compressed.js"></script>
     <script src="static/js/en.js"></script>
@@ -14,10 +14,7 @@
 
 </div>
 <div id="blocklyDiv" style="height: 480px; width: 600px;"><p id="textarea">test</p>
-    <form method="POST">
-        <button type="submit" value="Submit" onclick="run()"> RunMe </button>
-    </form>
-
+        <button onclick="run()"> RunMe </button>
 </div>
 <xml id="toolbox" style="display: none">
   <block type="controls_if"></block>
@@ -112,7 +109,20 @@
 
       // now what do you do want to do with code...?
       alert(code)
-      //$.post("./play", {javascript_data: code});
+      var data = {"data": code}
+$.ajax({
+    type: 'POST',
+    contentType: 'application/json',
+    url: '/play',
+    dataType : 'json',
+    data : JSON.stringify(data),
+    success : (data) => {
+        console.log('success')
+    },
+    error : (data) => {
+        console.log('failure')
+    }
+});
   }
 
 
@@ -121,3 +131,4 @@
 
 </html>
 {% endblock %}
+
