@@ -6,24 +6,100 @@
     <script src="static/js/blockly_compressed.js"></script>
     <script src="static/js/blocks_compressed.js"></script>
     <script src="static/js/en.js"></script>
+    <script src="static/js/javascript_compressed.js"></script>
 </head>
 <body>
 <div>
     <h1>PLAY</h1>
+
 </div>
-<div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+<div id="blocklyDiv" style="height: 480px; width: 600px;"><p id="textarea">test</p></div>
 <xml id="toolbox" style="display: none">
   <block type="controls_if"></block>
   <block type="controls_repeat_ext"></block>
-  <block type="logic_compare"></block>
   <block type="math_number"></block>
-  <block type="math_arithmetic"></block>
-  <block type="text"></block>
-  <block type="text_print"></block>
+    <block type="move_forward"></block>
+    <block type="move_backward"></block>
+    <block type="turn_left"></block>
+    <block type="turn_right"></block>
 </xml>
 <script>
+    //add new block
+    Blockly.Blocks['move_forward'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("move forward");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+    Blockly.JavaScript['move_forward'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
+
+    Blockly.Blocks['move_backward'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("move backward");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(65);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+    Blockly.JavaScript['move_backward'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
+
+    Blockly.Blocks['turn_left'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("turn left");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(210);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+    Blockly.JavaScript['turn_left'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
+
+    Blockly.Blocks['turn_right'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("turn right");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(160);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+        Blockly.JavaScript['turn_left'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
   var workspace = Blockly.inject('blocklyDiv',
       {toolbox: document.getElementById('toolbox')});
+
+
+  function myUpdateFunction(event) {
+      document.getElementById('textarea').value = Blockly.JavaScript.workspaceToCode(workspace);
+  }
+  workspace.addChangeListener(myUpdateFunction);
 </script>
 </body>
 
