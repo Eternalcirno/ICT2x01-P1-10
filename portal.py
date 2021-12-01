@@ -22,7 +22,7 @@ app.secret_key = secrets.token_hex(32)
 @app.route("/",methods=["GET"])
 def homepage():
     print()
-    return render_template("./index.html")
+    return render_template("./homepage.html")
 
 @app.route("/admin", methods=["GET"])
 def admin():
@@ -36,6 +36,10 @@ def logout():
 @app.route("/dashboard", methods=["GET","POST"])
 def dashboard():
     return render_template("./dashboard.html")
+
+@app.route("/layout", methods=["GET","POST"])
+def layout():
+    return render_template("./layout.html")
 
 @app.route("/play", methods=["GET","POST"])
 def play():
