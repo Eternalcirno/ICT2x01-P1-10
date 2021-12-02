@@ -192,5 +192,5 @@ def cpass():
         return "password successfully changed"
 
 if __name__ == "__main__":
-    app.run(host='192.168.43.217', port=80)
-    #app.run()
+    #app.run(host='192.168.43.217', port=80)
+    app.run()
