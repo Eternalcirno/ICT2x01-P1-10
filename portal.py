@@ -10,44 +10,51 @@ import json
 import os
 import sqlite3 as sql
 
+ratelimit = 0
+btime = 0
+banned = False
+
 conn = sql.connect('database.db')
 print("Opened database successfully")
+
 
 conn.execute('CREATE TABLE IF NOT EXISTS speed_table (data TEXT)')
 conn.execute('CREATE TABLE IF NOT EXISTS line_table (data TEXT)')
 conn.execute('CREATE TABLE IF NOT EXISTS distance_table (data TEXT)')
-# with sql.connect("database.db") as con:
-#     cur = con.cursor()
+conn.execute('CREATE TABLE IF NOT EXISTS commands_table (data TEXT)')
+conn.execute('CREATE TABLE IF NOT EXISTS start_robot (data TEXT)')
+with sql.connect("database.db") as con:
+    cur = con.cursor()
 #     cur.execute('INSERT INTO speed_table(data) VALUES(0)')
 #     cur.execute('INSERT INTO line_table(data) VALUES(0)')
 #     cur.execute('INSERT INTO distance_table(data) VALUES(0)')
+#     cur.execute('INSERT INTO commands_table(data) VALUES(0)')
 #conn.execute('DROP TABLE data_table')
 #print("Table created successfully")
 conn.close()
+
 
 dotenv_file = dotenv.find_dotenv()
 dotenv.load_dotenv(dotenv_file)
 config = dotenv.dotenv_values(dotenv_file)
 uname = config["UNAME"]
 passwd = config["PASS"]
-ratelimit = 0
-btime = 0
-banned = False
+print(passwd)
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(32)
-
 @app.route("/",methods=["GET"])
 def homepage():
     print()
-    return render_template("./index.html")
+    return render_template("./homepage.html")
 
 @app.route("/data",methods=["GET","POST"])
 def data():
-    if request.method == 'POST':  # this block is only entered when the form is submitted
+    if request.method == 'POST':  # this block is only entered when car posts
         speed = request.args.get('speed')
         line = request.args.get('line')
         distance = request.args.get('distance')
+        start_robot = request.args.get('start_robot')
         with sql.connect("database.db") as con:
             cur = con.cursor()
             if speed is not None:
@@ -56,6 +63,8 @@ def data():
                 cur.execute('UPDATE line_table SET data=? WHERE rowid=1', (line,))
             if distance is not None:
                 cur.execute('UPDATE distance_table SET data=? WHERE rowid=1', (distance,))
+            if start_robot is not None:
+                cur.execute('UPDATE start_robot SET data=? WHERE rowid=1', (start_robot,))
             con.commit()
 
     with sql.connect("database.db") as con:
@@ -63,19 +72,35 @@ def data():
         cur.execute("select * from speed_table")
         row = cur.fetchone()
         speed = row[0]
+
         cur.execute("select * from line_table")
         row = cur.fetchone()
         line = row[0]
+
         cur.execute("select * from distance_table")
         row = cur.fetchone()
         distance = row[0]
 
-    return render_template("./data.html",speed=speed,line=line,distance=distance)
+        cur.execute("select * from start_robot")
+        row = cur.fetchone()
+        start_robot = row[0]
+
+    return render_template("./data.html",speed=speed,line=line,distance=distance,start_robot=start_robot)
 
 @app.route("/commands", methods=["GET"])
 def commands():
-    command = str(123456)
-    return render_template("./commands.html",command=command)
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        cur.execute("select * from commands_table")
+        row = cur.fetchone()
+        command = "["+row[0]+"]"
+    # return render_template("./commands.html",command=command)
+    return command
+
+@app.route("/start", methods=["GET"])
+def start():
+    start = "1"
+    return render_template("./start.html",start=start)
 
 @app.route("/admin", methods=["GET"])
 def admin():
@@ -90,8 +115,26 @@ def logout():
 def dashboard():
     return render_template("./dashboard.html")
 
+@app.route("/layout", methods=["GET","POST"])
+def layout():
+    return render_template("./layout.html")
+
 @app.route("/play", methods=["GET","POST"])
 def play():
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        cur.execute('UPDATE commands_table SET data=0 WHERE rowid=1')
+    if (request.method == "POST"):
+        cmds = request.get_json()['data']
+        start = request.get_json()['start']
+        commands = start+cmds
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
+            #cur.execute('UPDATE start_robot SET data=1 WHERE rowid=1', (commands,))
+            cur.execute('UPDATE commands_table SET data=? WHERE rowid=1',(commands,))
+
+        print(cmds)
+
     return render_template("./play.html")
 
 @app.route("/auth", methods=["POST"])
@@ -103,8 +146,11 @@ def login():
     if(banned and (now - btime) >= 10):
         ratelimit = 0
         banned = False
+
     user = request.form.get("login")
     password = request.form.get("password")
+    print(user)
+    print(password)
     hpassword = hashlib.sha256(password.encode('utf-8')).hexdigest()
     if(user == ""):
         return "Username cannot be empty"
@@ -171,4 +217,5 @@ def cpass():
         return "password successfully changed"
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='192.168.43.217', port=80)
+    #app.run()
