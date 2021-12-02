@@ -10,6 +10,10 @@ import json
 import os
 import sqlite3 as sql
 
+ratelimit = 0
+btime = 0
+banned = False
+
 conn = sql.connect('database.db')
 print("Opened database successfully")
 
@@ -36,7 +40,7 @@ passwd = config["PASS"]
 print(passwd)
 
 app = Flask(__name__)
-
+app.secret_key = secrets.token_hex(32)
 @app.route("/",methods=["GET"])
 def homepage():
     print()
@@ -124,8 +128,11 @@ def login():
     if(banned and (now - btime) >= 10):
         ratelimit = 0
         banned = False
+
     user = request.form.get("login")
     password = request.form.get("password")
+    print(user)
+    print(password)
     hpassword = hashlib.sha256(password.encode('utf-8')).hexdigest()
     if(user == ""):
         return "Username cannot be empty"
