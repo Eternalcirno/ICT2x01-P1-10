@@ -14,11 +14,10 @@
 <body>
 
 </div>
-<div id="blocklyDiv" style="height: 480px; width: 600px;"><p id="textarea">test</p>
-        <button onclick="run()"> RunMe </button>
+<div id="blocklyDiv" style="height: 480px; width: 600px;"><p id="textarea"><h1>Set Commands</h1></p>
+    <button onclick="run()"> Save to car </button>
 </div>
 <xml id="toolbox" style="display: none">
-  <block type="controls_if"></block>
   <block type="controls_repeat_ext"></block>
   <block type="math_number"></block>
     <block type="move_forward"></block>
@@ -26,6 +25,7 @@
     <block type="turn_left"></block>
     <block type="turn_right"></block>
 </xml>
+
 <script>
     //add new block
     Blockly.Blocks['move_forward'] = {
@@ -41,7 +41,7 @@
 };
     Blockly.Python['move_forward'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = "+'1'";
+  var code = "1";
   return code;
 };
 
@@ -58,7 +58,7 @@
 };
     Blockly.Python['move_backward'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = "+'2'";
+  var code = "2";
   return code;
 };
 
@@ -75,7 +75,7 @@
 };
     Blockly.Python['turn_left'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = "+'3'";
+  var code = "3";
   return code;
 };
 
@@ -92,7 +92,7 @@
 };
         Blockly.Python['turn_right'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = "+'4'";
+  var code = "4";
   return code;
 };
   var workspace = Blockly.inject('blocklyDiv',
