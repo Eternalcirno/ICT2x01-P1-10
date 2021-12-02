@@ -15,7 +15,7 @@
 
 </div>
 <div id="blocklyDiv" style="height: 480px; width: 600px;"><p id="textarea"><h1>Set Commands</h1></p>
-    <button onclick="run()"> Save to car </button>
+    <button id="test" value="1" onclick="run()"> Save to car </button>
 </div>
 <xml id="toolbox" style="display: none">
   <block type="controls_repeat_ext"></block>
@@ -107,10 +107,10 @@
   var run = function() {
       Blockly.Python.addReservedWords('code');
       var code = Blockly.Python.workspaceToCode(workspace);
-
+      var test = document.getElementById("test").value;
       // now what do you do want to do with code...?
-      alert(code)
-      var data = {"data": code}
+      alert("Command Code"+code+"Start"+test);
+      var data = {"start": test, "data": code}
 $.ajax({
     type: 'POST',
     contentType: 'application/json',
@@ -132,4 +132,3 @@ $.ajax({
 
 </html>
 {% endblock %}
-
