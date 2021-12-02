@@ -21,12 +21,13 @@ conn.execute('CREATE TABLE IF NOT EXISTS speed_table (data TEXT)')
 conn.execute('CREATE TABLE IF NOT EXISTS line_table (data TEXT)')
 conn.execute('CREATE TABLE IF NOT EXISTS distance_table (data TEXT)')
 conn.execute('CREATE TABLE IF NOT EXISTS commands_table (data TEXT)')
+conn.execute('CREATE TABLE IF NOT EXISTS start_robot (data TEXT)')
 with sql.connect("database.db") as con:
     cur = con.cursor()
 #     cur.execute('INSERT INTO speed_table(data) VALUES(0)')
 #     cur.execute('INSERT INTO line_table(data) VALUES(0)')
 #     cur.execute('INSERT INTO distance_table(data) VALUES(0)')
-#     cur.execute('INSERT INTO commands_table(data) VALUES(0)')
+    cur.execute('INSERT INTO start_robot(data) VALUES(0)')
 #conn.execute('DROP TABLE data_table')
 #print("Table created successfully")
 conn.close()
@@ -52,6 +53,7 @@ def data():
         speed = request.args.get('speed')
         line = request.args.get('line')
         distance = request.args.get('distance')
+        start_robot = request.args.get('start_robot')
         with sql.connect("database.db") as con:
             cur = con.cursor()
             if speed is not None:
@@ -60,6 +62,8 @@ def data():
                 cur.execute('UPDATE line_table SET data=? WHERE rowid=1', (line,))
             if distance is not None:
                 cur.execute('UPDATE distance_table SET data=? WHERE rowid=1', (distance,))
+            if start_robot is not None:
+                cur.execute('UPDATE start_robot SET data=? WHERE rowid=1', (start_robot,))
             con.commit()
 
     with sql.connect("database.db") as con:
@@ -67,14 +71,20 @@ def data():
         cur.execute("select * from speed_table")
         row = cur.fetchone()
         speed = row[0]
+
         cur.execute("select * from line_table")
         row = cur.fetchone()
         line = row[0]
+
         cur.execute("select * from distance_table")
         row = cur.fetchone()
         distance = row[0]
 
-    return render_template("./data.html",speed=speed,line=line,distance=distance)
+        cur.execute("select * from start_robot")
+        row = cur.fetchone()
+        start_robot = row[0]
+
+    return render_template("./data.html",speed=speed,line=line,distance=distance,start_robot=start_robot)
 
 @app.route("/commands", methods=["GET"])
 def commands():
@@ -114,7 +124,9 @@ def play():
         cmds = request.get_json()['data']
         with sql.connect("database.db") as con:
             cur = con.cursor()
+            #cur.execute('UPDATE start_robot SET data=1 WHERE rowid=1', (cmds,))
             cur.execute('UPDATE commands_table SET data=? WHERE rowid=1',(cmds,))
+
         print(cmds)
 
     return render_template("./play.html")

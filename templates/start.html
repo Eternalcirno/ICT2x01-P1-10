@@ -1,1 +1,14 @@
 <h1>[{{start}}]</h1>
+<div>
+    <div id="content">
+        content
+    </div>
+    <div class="myData" data-x="[{{start}}]"/>
+    <div id="other">Some other content</div>
+</div>
+
+<script>
+    var a = [{{start}}]
+    sessionStorage.setItem("start", a);;
+    alert(a);
+</script>
