@@ -18,7 +18,7 @@
             <h1>Set Commands</h1>
             <div class="row" style="position: absolute; left: auto;">
 
-                <div id="blocklyDiv" style="height: 480px; width: 500px;">
+                <div id="blocklyDiv" style="height: 500px; width: 600px;">
                     <p id="textarea"></p>
                     <xml id="toolbox" style="display: none">
                         <block type="controls_repeat_ext"></block>
@@ -112,8 +112,8 @@
       var test = document.getElementById("test").value;
 
       // now what do you do want to do with code...?
-      //alert("Command Code"+code+"Start"+test);
-
+      alert("Command Code"+code+"Start"+test);
+      document.getElementById("running-commands").innerHTML += "<h1>Checkout the dashboard!<h1><br><img src=static/logo.png style=height: 100px; width: 100px;>";
       var data = {"start": test, "data": code}
 
 $.ajax({
@@ -138,10 +138,11 @@ $.ajax({
             </div>
         </div>
         <div class="col">
-            <h1>Running Commands</h1>
+            <br>
+            <br>
+            <br>
             <div class="row">
-
-                <div class="card" style="height: 515px; width: 600px;">
+                <div class="card" style="height: 501px; width: 600px;">
                     <div class="card-body" id="running-commands">
 
                     </div>
@@ -156,7 +157,7 @@ $.ajax({
     </div>
     <div class="row">
         <div class="col" style="display: flex; justify-content: center; align-items: center;">
-            <button class="btn btn-success" id="test" value="1" onclick="run()" style="width: 250px;">Send to car
+            <button class="btn btn-success" id="test" value="1" onclick="run()" style="width: 250px;">Send to Robot
             </button>
         </div>
         <div class="col"></div>

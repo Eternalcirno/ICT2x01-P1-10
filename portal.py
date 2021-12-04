@@ -129,14 +129,14 @@ def dashboard():
         cur.execute("select * from commands_table")
         row = cur.fetchone()
 
-        cur.execute("select * from checkpoint")
-        row = cur.fetchone()
-        checkpoint = row[0]
+        #cur.execute("select * from checkpoint")
+        #row = cur.fetchone()
+        #checkpoint = row[0]
 
 
         command = "[" + row[0] + "]"
 
-        return render_template("./dashboard.html",command=command,checkpoint=checkpoint)
+        return render_template("./dashboard.html",command=command)
     #return command
     #return render_template("./dashboard.html", speed=speed,checkpoint=checkpoint,)
 
