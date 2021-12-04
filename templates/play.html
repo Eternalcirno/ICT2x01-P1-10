@@ -12,21 +12,23 @@
     <script src="static/js/python_compressed.js"></script>
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Set Commands</h1>
+            <div class="row" style="position: absolute; left: auto;">
 
-</div>
-<div id="blocklyDiv" style="height: 480px; width: 600px;"><p id="textarea"><h1>Set Commands</h1></p>
-    <button id="test" value="1" onclick="run()"> Save to car </button>
-</div>
-<xml id="toolbox" style="display: none">
-  <block type="controls_repeat_ext"></block>
-  <block type="math_number"></block>
-    <block type="move_forward"></block>
-    <block type="move_backward"></block>
-    <block type="turn_left"></block>
-    <block type="turn_right"></block>
-</xml>
-
-<script>
+                <div id="blocklyDiv" style="height: 480px; width: 500px;">
+                    <p id="textarea"></p>
+                    <xml id="toolbox" style="display: none">
+                        <block type="controls_repeat_ext"></block>
+                        <block type="math_number"></block>
+                        <block type="move_forward"></block>
+                        <block type="move_backward"></block>
+                        <block type="turn_left"></block>
+                        <block type="turn_right"></block>
+                    </xml>
+                    <script>
     //add new block
     Blockly.Blocks['move_forward'] = {
   init: function() {
@@ -108,9 +110,12 @@
       Blockly.Python.addReservedWords('code');
       var code = Blockly.Python.workspaceToCode(workspace);
       var test = document.getElementById("test").value;
+
       // now what do you do want to do with code...?
-      alert("Command Code"+code+"Start"+test);
+      //alert("Command Code"+code+"Start"+test);
+
       var data = {"start": test, "data": code}
+
 $.ajax({
     type: 'POST',
     contentType: 'application/json',
@@ -126,8 +131,38 @@ $.ajax({
 });
   }
 
+                    </script>
 
-</script>
+                </div>
+
+            </div>
+        </div>
+        <div class="col">
+            <h1>Running Commands</h1>
+            <div class="row">
+
+                <div class="card" style="height: 515px; width: 600px;">
+                    <div class="card-body" id="running-commands">
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col" style="display: flex; justify-content: center; align-items: center;">
+            <button class="btn btn-success" id="test" value="1" onclick="run()" style="width: 250px;">Send to car
+            </button>
+        </div>
+        <div class="col"></div>
+
+    </div>
+</div>
 </body>
 
 </html>
