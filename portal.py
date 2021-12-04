@@ -1,5 +1,11 @@
 import hashlib
 import re
+from markupsafe import Markup
+from decouple import config
+import auth
+import json
+import sqlite3 as sql
+import hashlib
 import secrets
 import sqlite3 as sql
 import time
@@ -39,6 +45,7 @@ print(passwd)
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(32)
+a = auth.Auth(uname, passwd)
 
 
 @app.route("/", methods=["GET"])
@@ -163,89 +170,48 @@ def play():
 
 @app.route("/auth", methods=["POST"])
 def login():
-    now = time.time()
-    global btime
-    global ratelimit
-    global banned
-    if (banned and (now - btime) >= 10):
-        ratelimit = 0
-        banned = False
-
     user = request.form.get("login")
     password = request.form.get("password")
-    print(user)
-    print(password)
-    hpassword = hashlib.sha256(password.encode('utf-8')).hexdigest()
-    if (user == ""):
-        return "Username cannot be empty"
-    if (password == ""):
-        return "Password cannot be empty"
-    if (user == uname and hpassword == passwd):
+    try:
+        a.login(user,password)
         flash("Successfully logged in")
         resp = make_response(render_template("./panel.html"))
         session["auth"] = "1"
         return resp
-    if (user != uname or hpassword != passwd):
-        if (ratelimit >= 5 and banned == False):
-            btime = time.time()
-            banned = True
-            return "5 invalid tries, account locked out"
-        ratelimit += 1
-        return "Invalid username or password"
-
+    except NameError as e:
+        return str(e)
 
 @app.route("/changespeed", methods=["POST"])
 def cspeed():
     pass
-
-
-# ???
+   # ???
 
 @app.route("/changedist", methods=["POST"])
 def cdist():
     pass
+   # ???
 
-
-# ???
-
-@app.route("/changepass", methods=["GET", "POST"])
+@app.route("/changepass", methods=["GET","POST"])
 def cpass():
     try:
         cookie = session["auth"]
     except:
         return render_template("./admin.html")
-    if (cookie == None):
+    if(cookie == None):
         return render_template("./admin.html")
-    if (request.method == "GET"):
+    if(request.method == "GET"):
         return render_template("./changepass.html")
-    print(request.form)
-    global passwd
-    a = passwd
-    oldpass = request.form.get("oldpass")
-    holdpass = hashlib.sha256(oldpass.encode('utf-8')).hexdigest()
     newpass = request.form.get("newpass")
     cnewpass = request.form.get("cfmnewpass")
-    if (oldpass == newpass):
-        return "Old password cannot be the same as new password"
-    if (oldpass == ""):
-        return "Old password cannot be empty"
-    if (newpass == ""):
-        return "New password cannot be empty"
-    if (cnewpass == ""):
-        return "Confirm new password cannot be empty"
-    if (holdpass != a):
-        return "Incorrect old password"
-    elif (newpass != cnewpass):
-        return "Passwords do not match"
-    elif (not (re.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$", newpass))):
-        return "Password should be 6-20 chars long with upper and lower case characters and special characters"
-    elif (holdpass == a):
-        hashed = hashlib.sha256(newpass.encode('utf-8')).hexdigest()
+    oldpass = request.form.get("oldpass")
+    hashed = hashlib.sha256(newpass.encode('utf-8')).hexdigest()
+    try:
+        a.change(oldpass,newpass,cnewpass,hashed)
         dotenv.set_key(dotenv_file, "PASS", hashed)
-        passwd = dotenv.dotenv_values(dotenv_file)["PASS"]
         return "password successfully changed"
+    except NameError as e:
+        return str(e)
 
 
 if __name__ == "__main__":
-    # app.run(host='192.168.43.217', port=80)
     app.run()
