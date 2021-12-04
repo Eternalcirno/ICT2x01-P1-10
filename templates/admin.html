@@ -1,1 +1,27 @@
-<h1>HI</h1>
+{% extends 'layout.html' %} {% block title %} Homepage {% endblock %} {% block page_title %} Home {% endblock %} {% block body %}
+    <style>
+        .center {
+margin: auto;
+width: 60%;
+border: 5px solid #FFFF00;
+padding: 10px;
+}
+
+    </style>
+<div class="container">
+    <div class="center">
+        <form method="POST" action="/auth">
+            <label>Username:</label>
+            <input type="text" name="login"></input>
+            <br>
+            <br>
+            <label>Password:</label>
+            <input type="password" name="password"></input><br>
+            <input type="submit"></input>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+

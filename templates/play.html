@@ -1,31 +1,169 @@
 <!DOCTYPE html>
+{% extends 'layout.html' %} {% block title %} Homepage {% endblock %} {% block page_title %} Home {% endblock %} {% block body %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="static/js/jquery-3.6.0.min.js"></script>
     <script src="static/js/blockly_compressed.js"></script>
     <script src="static/js/blocks_compressed.js"></script>
     <script src="static/js/en.js"></script>
+    <script src="static/js/javascript_compressed.js"></script>
+    <script src="static/js/python_compressed.js"></script>
 </head>
 <body>
-<div>
-    <h1>PLAY</h1>
-</div>
-<div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
-<xml id="toolbox" style="display: none">
-  <block type="controls_if"></block>
-  <block type="controls_repeat_ext"></block>
-  <block type="logic_compare"></block>
-  <block type="math_number"></block>
-  <block type="math_arithmetic"></block>
-  <block type="text"></block>
-  <block type="text_print"></block>
-</xml>
-<script>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Set Commands</h1>
+            <div class="row" style="position: absolute; left: auto;">
+
+                <div id="blocklyDiv" style="height: 480px; width: 500px;">
+                    <p id="textarea"></p>
+                    <xml id="toolbox" style="display: none">
+                        <block type="controls_repeat_ext"></block>
+                        <block type="math_number"></block>
+                        <block type="move_forward"></block>
+                        <block type="move_backward"></block>
+                        <block type="turn_left"></block>
+                        <block type="turn_right"></block>
+                    </xml>
+                    <script>
+    //add new block
+    Blockly.Blocks['move_forward'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("move forward");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+    Blockly.Python['move_forward'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = "1";
+  return code;
+};
+
+    Blockly.Blocks['move_backward'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("move backward");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(65);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+    Blockly.Python['move_backward'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = "2";
+  return code;
+};
+
+    Blockly.Blocks['turn_left'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("turn left");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(210);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+    Blockly.Python['turn_left'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = "3";
+  return code;
+};
+
+    Blockly.Blocks['turn_right'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("turn right");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(160);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+        Blockly.Python['turn_right'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = "4";
+  return code;
+};
   var workspace = Blockly.inject('blocklyDiv',
       {toolbox: document.getElementById('toolbox')});
-</script>
+
+
+  function myUpdateFunction(event) {
+      document.getElementById('textarea').value = Blockly.JavaScript.workspaceToCode(workspace);
+  }
+  workspace.addChangeListener(myUpdateFunction);
+
+  var run = function() {
+      Blockly.Python.addReservedWords('code');
+      var code = Blockly.Python.workspaceToCode(workspace);
+      var test = document.getElementById("test").value;
+
+      // now what do you do want to do with code...?
+      //alert("Command Code"+code+"Start"+test);
+
+      var data = {"start": test, "data": code}
+
+$.ajax({
+    type: 'POST',
+    contentType: 'application/json',
+    url: '/play',
+    dataType : 'json',
+    data : JSON.stringify(data),
+    success : (data) => {
+        console.log('success')
+    },
+    error : (data) => {
+        console.log('failure')
+    }
+});
+  }
+
+                    </script>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col">
+            <h1>Running Commands</h1>
+            <div class="row">
+
+                <div class="card" style="height: 515px; width: 600px;">
+                    <div class="card-body" id="running-commands">
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col" style="display: flex; justify-content: center; align-items: center;">
+            <button class="btn btn-success" id="test" value="1" onclick="run()" style="width: 250px;">Send to car
+            </button>
+        </div>
+        <div class="col"></div>
+
+    </div>
+</div>
 </body>
 
 </html>
-
+{% endblock %}
