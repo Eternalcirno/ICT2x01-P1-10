@@ -1,7 +1,7 @@
 import auth
 import hashlib
 import secrets
-import db as db
+import db
 import dotenv
 from flask import *
 
