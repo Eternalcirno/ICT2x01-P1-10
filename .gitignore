@@ -1,3 +1,4 @@
 #ignore env vars
 .env
 .idea/*
+database.db

@@ -15,8 +15,13 @@
     <h1>PLAY</h1>
 
 </div>
+<<<<<<< Updated upstream
 <div id="blocklyDiv" style="height: 480px; width: 600px;"><p id="textarea">test</p>
         <button onclick="run()"> RunMe </button>
+=======
+<div id="blocklyDiv" style="height: 480px; width: 600px;"><p id="textarea"><h1>Set Commands</h1></p>
+    <button id="test" value="1" onclick="run()"> Start </button>
+>>>>>>> Stashed changes
 </div>
 <xml id="toolbox" style="display: none">
   <block type="controls_if"></block>
@@ -110,8 +115,13 @@
       var code = Blockly.Python.workspaceToCode(workspace);
 
       // now what do you do want to do with code...?
+<<<<<<< Updated upstream
       alert(code)
       var data = {"data": code}
+=======
+      alert("Car will start in 10 seconds");
+      var data = {"start": test, "data": code}
+>>>>>>> Stashed changes
 $.ajax({
     type: 'POST',
     contentType: 'application/json',
