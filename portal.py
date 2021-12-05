@@ -88,6 +88,13 @@ def play():
     return render_template("./play.html")
 
 
+@app.route("/reset", methods=["POST"])
+def reset():
+    reset = request.args.get('reset')
+    db.update_commands(reset)
+    return reset
+
+
 @app.route("/auth", methods=["POST"])
 def login():
     user = request.form.get("login")
