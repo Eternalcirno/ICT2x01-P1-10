@@ -30,44 +30,34 @@ def reset_database():
     conn.execute('DROP TABLE IF EXISTS distance_table')
     conn.execute('DROP TABLE IF EXISTS commands_table')
     conn.execute('DROP TABLE IF EXISTS start_robot')
-    conn.execute('DROP TABLE IF EXISTS checkpoint')
 
-    conn.execute('CREATE TABLE IF NOT EXISTS speed_table (data TEXT)')
-    conn.execute('CREATE TABLE IF NOT EXISTS line_table (data TEXT)')
-    conn.execute('CREATE TABLE IF NOT EXISTS distance_table (data TEXT)')
-    conn.execute('CREATE TABLE IF NOT EXISTS commands_table (data TEXT)')
-    conn.execute('CREATE TABLE IF NOT EXISTS start_robot (data TEXT)')
-    conn.execute('CREATE TABLE IF NOT EXISTS checkpoint (data TEXT)')
+    conn.execute('CREATE TABLE IF NOT EXISTS speed_table (val TEXT)')
+    conn.execute('CREATE TABLE IF NOT EXISTS line_table (val TEXT)')
+    conn.execute('CREATE TABLE IF NOT EXISTS distance_table (val TEXT)')
+    conn.execute('CREATE TABLE IF NOT EXISTS commands_table (val TEXT)')
+    conn.execute('CREATE TABLE IF NOT EXISTS start_robot (val TEXT)')
 
-    conn.execute('INSERT INTO speed_table(data) VALUES(0)')
-    conn.execute('INSERT INTO line_table(data) VALUES(0)')
-    conn.execute('INSERT INTO distance_table(data) VALUES(0)')
-    conn.execute('INSERT INTO commands_table(data) VALUES(0)')
-    conn.execute('INSERT INTO start_robot(data) VALUES(0)')
-    conn.execute('INSERT INTO checkpoint(data) VALUES(0)')
+    conn.execute('INSERT INTO speed_table(val) VALUES(0)')
+    conn.execute('INSERT INTO line_table(val) VALUES(0)')
+    conn.execute('INSERT INTO distance_table(val) VALUES(0)')
+    conn.execute('INSERT INTO commands_table(val) VALUES(0)')
+    conn.execute('INSERT INTO start_robot(val) VALUES(0)')
 
     conn.commit()
     print('database reset')
     conn.close()
 
 
-def update_data(speed,line,distance,start_robot,checkpoint):
+def update_data(speed,line,distance,start_robot):
     conn = Database()
     if speed is not None:
-        query = 'UPDATE speed_table SET data=?' + speed + ' WHERE rowid=1'
-        conn.execute(query)
+        conn.cur.execute("UPDATE speed_table SET val=? WHERE rowid=1", (speed,))
     if line is not None:
-        query = 'UPDATE line_table SET data=?' + line + ' WHERE rowid=1'
-        conn.execute(query)
+        conn.cur.execute("UPDATE line_table SET val=? WHERE rowid=1", (line,))
     if distance is not None:
-        query = 'UPDATE distance_table SET data=?' + distance + ' WHERE rowid=1'
-        conn.execute(query)
+        conn.cur.execute("UPDATE distance_table SET val=? WHERE rowid=1", (distance,))
     if start_robot is not None:
-        query = 'UPDATE start_robot SET data=?' + start_robot + ' WHERE rowid=1'
-        conn.execute(query)
-    if checkpoint is not None:
-        query = 'UPDATE checkpoint SET data=?' + checkpoint + ' WHERE rowid=1'
-        conn.execute(query)
+        conn.cur.execute("UPDATE start_robot SET val=? WHERE rowid=1", (start_robot,))
     conn.commit()
     conn.close()
 
@@ -133,8 +123,7 @@ def get_commands():
 
 def update_commands(commands):
     conn = Database()
-    query = "UPDATE commands_table SET data=" + commands + " WHERE rowid=1"
-    conn.execute(query)
+    conn.cur.execute("UPDATE commands_table SET val=? WHERE rowid=1", (commands,))
     conn.commit()
     conn.close()
 

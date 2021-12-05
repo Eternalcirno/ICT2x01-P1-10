@@ -41,9 +41,9 @@
     this.setHelpUrl('http://www.example.com/');
   }
 };
-    Blockly.Python['move_forward'] = function(block) {
+    Blockly.JavaScript['move_forward'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = "1";
+  var code = "commands = commands.concat('1');\n";
   return code;
 };
 
@@ -58,9 +58,9 @@
     this.setHelpUrl('http://www.example.com/');
   }
 };
-    Blockly.Python['move_backward'] = function(block) {
+    Blockly.JavaScript['move_backward'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = "2";
+  var code = "commands = commands.concat('2');\n";
   return code;
 };
 
@@ -75,9 +75,9 @@
     this.setHelpUrl('http://www.example.com/');
   }
 };
-    Blockly.Python['turn_left'] = function(block) {
+    Blockly.JavaScript['turn_left'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = "3";
+  var code = "commands = commands.concat('3');\n";
   return code;
 };
 
@@ -92,9 +92,9 @@
     this.setHelpUrl('http://www.example.com/');
   }
 };
-        Blockly.Python['turn_right'] = function(block) {
+        Blockly.JavaScript['turn_right'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = "4";
+  var code = "commands = commands.concat('4');\n";
   return code;
 };
   var workspace = Blockly.inject('blocklyDiv',
@@ -107,14 +107,14 @@
   workspace.addChangeListener(myUpdateFunction);
 
   var run = function() {
-      Blockly.Python.addReservedWords('code');
-      var code = Blockly.Python.workspaceToCode(workspace);
+      Blockly.JavaScript.addReservedWords('code');
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      var codestr = "commands = '';\n" + code;
+      var codecmds = eval(codestr)
       var test = document.getElementById("test").value;
-
-      // now what do you do want to do with code...?
-      alert("Command Code"+code+"Start"+test);
+      alert(code);
       document.getElementById("running-commands").innerHTML += "<h1>Checkout the dashboard!<h1><br><img src=static/logo.png style=height: 100px; width: 100px;>";
-      var data = {"start": test, "data": code}
+      var data = {"start": test, "data": codecmds}
 
 $.ajax({
     type: 'POST',

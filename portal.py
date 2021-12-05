@@ -8,7 +8,7 @@ from flask import *
 ratelimit = 0
 btime = 0
 banned = False
-
+commands = ""
 
 db.reset_database()
 print("Opened database successfully")
@@ -83,6 +83,7 @@ def play():
         cmds = request.get_json()['data']
         start = request.get_json()['start']
         cmdstr = start + cmds
+        print(cmds)
         db.update_commands(cmdstr)
 
     return render_template("./play.html")
