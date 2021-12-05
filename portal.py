@@ -52,6 +52,7 @@ def data():
 @app.route("/commands", methods=["GET"])
 def commands():
     command = db.get_commands()
+    print("command", command)
     return command
 
 
@@ -69,7 +70,8 @@ def logout():
 @app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
     command = db.get_commands()
-    return render_template("./dashboard.html",command=command)
+    line = db.get_line()
+    return render_template("./dashboard.html",command=command, line=line)
 
 
 @app.route("/layout", methods=["GET", "POST"])
@@ -81,9 +83,9 @@ def layout():
 def play():
     if request.method == "POST":
         cmds = request.get_json()['data']
-        start = request.get_json()['start']
-        cmdstr = start + cmds
-        db.update_commands(cmdstr)
+        #start = request.get_json()['start']
+        #cmdstr = start + cmds
+        db.update_commands(cmds)
 
     return render_template("./play.html")
 

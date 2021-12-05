@@ -25,6 +25,12 @@ var test = function() {
 	}
 }
 
+var ckpoint = function() {
+    var a = {{line}};
+    var checkpoint = JSON.stringify(a);
+    document.getElementById("ckpoint").innerHTML = checkpoint + " Checkpoint Captured!"
+}
+setInterval(ckpoint,5000)
     </script>
 </head>
 <!-- <script src="static/js/dashboard.js"></script> -->
@@ -44,32 +50,8 @@ var test = function() {
         <div class="col">
             <div class="row">
                 <div><h1>Checkpoint</h1></div>
-                <div id="counter" style="width:600px;height:250px;"></div>
-                <script>
-                        let counts=setInterval(updated);
-                        let upto=1000;
-        function updated(){
-            var count= document.getElementById("counter");
-            count.innerHTML=--upto;
-            if(upto === 0) {
-                clearInterval(counts);
-            }
-        }
+                <div id="counter" style="width:600px;height:250px;"><h1 id="ckpoint"></h1></div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </script>
             </div>
         </div>
     </div>

@@ -40,7 +40,7 @@ def reset_database():
     conn.execute('CREATE TABLE IF NOT EXISTS checkpoint (data TEXT)')
 
     conn.execute('INSERT INTO speed_table(data) VALUES(0)')
-    conn.execute('INSERT INTO line_table(data) VALUES(0)')
+    conn.execute('INSERT INTO line_table(data) VALUES(1)')
     conn.execute('INSERT INTO distance_table(data) VALUES(0)')
     conn.execute('INSERT INTO commands_table(data) VALUES(0)')
     conn.execute('INSERT INTO start_robot(data) VALUES(0)')
