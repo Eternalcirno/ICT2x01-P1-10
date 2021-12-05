@@ -54,15 +54,20 @@ def reset_database():
 def update_data(speed,line,distance,start_robot,checkpoint):
     conn = Database()
     if speed is not None:
-        conn.execute('UPDATE speed_table SET data=? WHERE rowid=1', (speed,))
+        query = 'UPDATE speed_table SET data=?' + speed + ' WHERE rowid=1'
+        conn.execute(query)
     if line is not None:
-        conn.execute('UPDATE line_table SET data=? WHERE rowid=1', (line,))
+        query = 'UPDATE line_table SET data=?' + line + ' WHERE rowid=1'
+        conn.execute(query)
     if distance is not None:
-        conn.execute('UPDATE distance_table SET data=? WHERE rowid=1', (distance,))
+        query = 'UPDATE distance_table SET data=?' + distance + ' WHERE rowid=1'
+        conn.execute(query)
     if start_robot is not None:
-        conn.execute('UPDATE start_robot SET data=? WHERE rowid=1', (start_robot,))
+        query = 'UPDATE start_robot SET data=?' + start_robot + ' WHERE rowid=1'
+        conn.execute(query)
     if checkpoint is not None:
-        conn.execute('UPDATE checkpoint SET data=? WHERE rowid=1', (checkpoint,))
+        query = 'UPDATE checkpoint SET data=?' + checkpoint + ' WHERE rowid=1'
+        conn.execute(query)
     conn.commit()
     conn.close()
 
@@ -122,10 +127,14 @@ def get_commands():
     conn.execute("select * from commands_table")
     row = conn.fetchone()
     command = "[" + row[0] + "]"
+    conn.close()
     return command
 
 
 def update_commands(commands):
     conn = Database()
-    conn.execute('UPDATE commands_table SET data=? WHERE rowid=1', (commands,))
+    query = "UPDATE commands_table SET data=" + commands + " WHERE rowid=1"
+    conn.execute(query)
+    conn.commit()
+    conn.close()
 
