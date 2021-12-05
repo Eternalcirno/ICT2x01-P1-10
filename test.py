@@ -55,6 +55,9 @@ class authTest(unittest.TestCase):
 
     def testChange(self):
         self.assertEqual(self.auth.change("admin", "Aaa12*", "Aaa12*","7337ead11dd6981dd6448d27f24cc687bf5d27fae506ab3f4ee80f8ac101f7fb"), 0)
+    
+    def tearDown(self) -> None:
+        return super().tearDown()
 
 if __name__ == '__main__':
     unittest.main()
