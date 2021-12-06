@@ -27,21 +27,6 @@
 ## Introduction 
 Crush Gear 2000 is a fun and interactive game where users can remotely connect and control the car using web portal. Users will have to navigate the car through an obstacle course. This project will be targeted at primary school students, which will encourage their problem-solving and critical-thinking skills.
 Other than the game, users will be able view sensor data from the car through the web portal. This allows users to see and understand what the car is sensing and how it is reacting. This will be beneficial for troubleshooting their navigation and gaining a better understanding on how a robot works.
-## WorkFlow 
-***Branch description*** 
-
-*Master Branch:*
-The master branch will be storing the final functioning codes. All developer’s work will be meagered together. 
-
-*Development branch:*
-Development branch consists of codes that may not be properly functioning. It may be unstable and crashes. 
-
-
-*Features branches:* Team members created different features branch from and merged it to development branch after completion. Before making changes on feature branches, members pulled changes to ensure all features branches are up to date. 
-
-**Below is the mock-up of the team's workflow :**
-![Class Diagram - Page 4 (1)](https://user-images.githubusercontent.com/51218376/144857342-ce86ea80-b74b-4a07-b299-30651b0206bd.png)
-
 
 
 ## How to Run
@@ -64,6 +49,7 @@ Python-Decouple
 
 ```
 pip install -r requirements.txt
+pip install Flask
 ```
 
 ### Execution
@@ -79,6 +65,19 @@ Both portal and car need to be connected to the same mobile hotspot. A .env file
 
 <!-- development workflow -->
 ## Development Workflow
+***Branch description*** 
+
+*Master Branch:*
+The master branch will be storing the final functioning codes. All developer’s work will be meagered together. 
+
+*Development branch:*
+Development branch consists of codes that may not be properly functioning. It may be unstable or crashes. 
+
+*Features branches:* Team members created different features branch from and merged it to development branch after completion. Before making changes on feature branches, members pulled changes to ensure all features branches are up to date. 
+
+**Below is the mock-up of the team's workflow :**
+![Class Diagram - Page 4 (2)](https://user-images.githubusercontent.com/51218376/144881081-1cdb40e6-7b0d-4a78-8c97-37e6b160d7bf.png)
+
 
 <!-- UAT -->
 ## UAT
