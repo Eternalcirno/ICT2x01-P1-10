@@ -71,7 +71,8 @@ def logout():
 def dashboard():
     command = db.get_commands()
     line = db.get_line()
-    return render_template("./dashboard.html",command=command, line=line)
+    distance = db.get_distance()
+    return render_template("./dashboard.html",command=command, line=line, distance=distance)
 
 
 @app.route("/layout", methods=["GET", "POST"])
