@@ -106,7 +106,7 @@ For the system state diagram, the end screen has been removed and replaced with 
 https://user-images.githubusercontent.com/19475364/144821629-be00601c-c1ff-4526-9c3c-f18b26cd86c6.mp4
 
 
-The video above shows all the test cases for admin authentication. In total, there are 14 test cases that was being run. We use the built in unit testing framework that python has provided.
+The video above shows all the test cases for admin authentication. In total, there are 14 test cases that was being run. We use the built in unit testing framework that python has provided. The test suite file is located in the root directory and can be run from the IDE itself.
 
 The list of test cases includes:
 * testEmptyPass
@@ -183,18 +183,6 @@ Seah Yuan Shengh - 2000532@sit.singaporetech.edu.sg
 Yang Yuqin - 2002620@sit.singaporetech.edu.sg
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
