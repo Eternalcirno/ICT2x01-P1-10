@@ -11,8 +11,9 @@ var test = function() {
 	var cmd = {{command}};
 	var cmd_to_str = JSON.stringify(cmd);
 	var cmd_split = cmd_to_str.split("");
+	alert(cmd_split)
 
-	for (var i=0; i < cmd_split.length; i++) {
+	for (var i=2; i < cmd_split.length; i++) {
 	    if (cmd_split[i] == 1) {
 	        document.getElementById("running-commands").innerHTML += time + ": Inserted FORWARD <br>"
 	    } else if (cmd_split[i] == 2) {

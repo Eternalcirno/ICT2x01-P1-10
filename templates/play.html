@@ -123,13 +123,13 @@
                             var test = document.getElementById("test").value;
 
                             var data = {"start": test, "data": codecmds}
-                            //alert(codecmds)
+                            alert(codecmds)
 
                             var x_axis = 0;
                             var y_axis = 0;
                             var car_movement = JSON.stringify(codecmds);
                             let numArray = num => Number(num);
-                            var car_split = Array.from(String(code), numArray);
+                            var car_split = Array.from(String(codecmds), numArray);
 
                             $.ajax({
                                 type: 'POST',
