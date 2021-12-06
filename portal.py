@@ -1,11 +1,13 @@
-import auth
 import hashlib
-import secrets
-import db
-import dotenv
 import os
+import secrets
+
+import dotenv
 from flask import *
 from werkzeug.utils import secure_filename
+
+import auth
+import db
 
 ratelimit = 0
 btime = 0
@@ -116,6 +118,16 @@ def login():
 
 @app.route("/adminsettings", methods=["GET"])
 def adminsettings():
+    if (request.method == "GET"):
+
+        maps = os.listdir(app.config["MAPIMAGE_UPLOADS"])
+        mapspath = []
+
+        for map in maps:
+            mapspath += [os.path.join(app.config["MAPIMAGE_UPLOADS"], map)]
+
+        print(mapspath)
+        return render_template("./adminsettings.html", maplist=mapspath)
     return render_template("./adminsettings.html")
 
 app.config["MAPIMAGE_UPLOADS"] = "static/img/map/"
