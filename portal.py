@@ -3,7 +3,9 @@ import hashlib
 import secrets
 import db
 import dotenv
+import os
 from flask import *
+from werkzeug.utils import secure_filename
 
 ratelimit = 0
 btime = 0
@@ -112,11 +114,89 @@ def login():
     except NameError as e:
         return str(e)
 
-@app.route("/changespeed", methods=["POST"])
+@app.route("/adminsettings", methods=["GET"])
+def adminsettings():
+    return render_template("./adminsettings.html")
+
+app.config["MAPIMAGE_UPLOADS"] = "static/img/map/"
+app.config["MAPIMAGE_EXTENSIONS"] = ["jpeg", "jpg", "png"]
+
+def mapImage_ext(filename):
+
+    if not "." in filename:
+        return False
+
+    ext = filename.rsplit(".", 1)[1]
+
+    if ext.lower() in app.config["MAPIMAGE_EXTENSIONS"]:
+        return True
+    else:
+        return False
+
+@app.route("/changemaxspeed", methods=["GET","POST"])
 def cspeed():
     pass
    # ???
 
+    if (request.method == "GET"):
+
+        maps = os.listdir(app.config["MAPIMAGE_UPLOADS"])
+        mapspath = []
+
+        for map in maps:
+            mapspath += [os.path.join(app.config["MAPIMAGE_UPLOADS"], map)]
+
+        print(mapspath)
+        return render_template("./adminsettings.html",maplist=mapspath)
+
+    if (request.method == "POST"):
+
+        maxspeed = request.form.get("maxspeed")
+        db.update_data(maxspeed)
+
+    return render_template("./adminsettings.html")
+
+@app.route("/maxspeed", methods=["GET"])
+def maxspeed():
+    maxspeed = db.get_maxspeed()
+    return maxspeed
+
+
+@app.route("/uploadmapimage", methods=["GET", "POST"])
+def upload_image():
+    if request.method == "POST":
+
+        if request.files:
+            mapimage = request.files["mapimage"]
+
+            if mapimage.filename == "":
+                print("No file selected")
+                return render_template("./adminsettings.html")
+
+            if not mapImage_ext(mapimage.filename):
+                print("Required Extension: .jpeg, .jpg, .png")
+                return render_template("./adminsettings.html")
+
+            else:
+                mapfilename = secure_filename(mapimage.filename)
+
+            path = os.path.join(app.config["MAPIMAGE_UPLOADS"], mapfilename)
+
+            mapimage.save(path)
+
+            print("Image saved")
+
+            maps = os.listdir(app.config["MAPIMAGE_UPLOADS"])
+
+            mapspath = []
+            for map in maps:
+                mapspath += [os.path.join(app.config["MAPIMAGE_UPLOADS"], map)]
+
+            print(mapspath)
+            return render_template("./adminsettings.html",maplist=mapspath)
+
+        return render_template("./adminsettings.html")
+    return render_template("./adminsettings.html")
 @app.route("/changedist", methods=["POST"])
 def cdist():
     pass
@@ -132,6 +212,8 @@ def cpass():
         return render_template("./admin.html")
     if(request.method == "GET"):
         return render_template("./changepass.html")
+    if(request.method == "GET"):
+        return render_template("./adminsettings.html")
     newpass = request.form.get("newpass")
     cnewpass = request.form.get("cfmnewpass")
     oldpass = request.form.get("oldpass")

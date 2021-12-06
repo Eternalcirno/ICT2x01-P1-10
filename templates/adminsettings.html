@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %} {% block title %} Homepage {% endblock %} {% block page_title %} Home {% endblock %} {% block body %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="row">
+            <h1>Change Password</h1>
+            <hr>
+            <form method="POST" action="/changepass">
+                <label for="oldpass">Old Password:</label>
+                <input type="password" name="oldpass"/><br>
+                <label for="oldpass">New Password:</label>
+                <input type="password" name="newpass"/><br>
+                <label for="oldpass">Confirm New Password:</label>
+                <input type="password" name="cfmnewpass"/><br>
+                <input type="submit" value="Submit"/>
+            </form>
+        </div>
+        <div class="row">
+            <form action="/changemaxspeed" method="POST">
+                <label for="maxspeed" class="form-label">Select maximum speed:</label>
+    
+                <select name="maxspeed" id="maxspeed" class="btn btn-light border-1 border-secondary m-1 p-0">
+                    <option>Fast</option>
+                    <option>Slow</option>
+                </select>
+
+                <input class="btn btn-success pt-0 pb-0" type="submit" value="Set" onclick="set()">
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="tutorial" checked content="on">
+                <label class="form-check-label" for="Tutorial">Toggle Tutorial Mode</label> <!-- {{tutStatus}} -->
+            </div>
+        </div>
+
+        
+        <div class="container border-3 border-secondary">
+            
+            <div class="row">
+                <div class="col">
+            
+                  <h1>Insert Challenge Map</h1>
+                  <hr>
+            
+                  <form action="/uploadmapimage" method="POST" enctype="multipart/form-data">
+
+                      <div class="mb-1">
+                          <input class="form-control pull-left d-inlne w-75" id="mapimage" name="mapimage" type="file">
+                          <button type="submit" class="btn btn-success p-auto m-1 mt-0 mb-0 d-inline w-10">Upload</button>
+                      </div>
+                      
+                  </form>
+            
+                </div>
+            </div>
+
+            <div class="row">
+            {% for map in maplist %}
+                {% set count = loop.index %}
+                <div class="col-3 col-sm-3 col-md-3">
+                    <div class="card">
+                        <input class="form-check-input m-1" type="checkbox" value="" id="map{{count}}">
+                        <img src={{map}} class="rounded" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Map {{count}}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</body>
+
+<script>
+var set = function() {
+    
+    var maxspeed = document.getElementById("maxspeed").value;
+    alert("You have set the maximum speed of the car to " + maxspeed + ".");
+}
+
+
+</script>
+
+</html>
+{% endblock %}

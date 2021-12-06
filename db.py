@@ -36,6 +36,7 @@ def reset_database():
     conn.execute('CREATE TABLE IF NOT EXISTS distance_table (val TEXT)')
     conn.execute('CREATE TABLE IF NOT EXISTS commands_table (val TEXT)')
     conn.execute('CREATE TABLE IF NOT EXISTS start_robot (val TEXT)')
+    conn.execute('CREATE TABLE IF NOT EXISTS maxspeed_table (data TEXT)')
 
     conn.execute('INSERT INTO speed_table(val) VALUES(0)')
     conn.execute('INSERT INTO line_table(val) VALUES(0)')
@@ -61,6 +62,12 @@ def update_data(speed,line,distance,start_robot):
     conn.commit()
     conn.close()
 
+def update_data(maxspeed):
+    conn = Database()
+    if maxspeed is not None:
+        conn.cur.execute('UPDATE maxspeed_table SET data=? WHERE rowid=1',(maxspeed,))
+    conn.commit()
+    conn.close()
 
 def get_speed():
     conn = Database()
@@ -120,9 +127,19 @@ def get_commands():
     conn.close()
     return command
 
+def get_maxspeed():
+    conn = Database()
+    conn.execute("select * from maxspeed_table WHERE rowid=1")
+    row = conn.fetchone()
+    maxspeed = row[0]
+    conn.commit()
+    conn.close()
+    return maxspeed
 
 def update_commands(commands):
     conn = Database()
     conn.cur.execute("UPDATE commands_table SET val=? WHERE rowid=1", (commands,))
     conn.commit()
     conn.close()
+    conn.close()
+
