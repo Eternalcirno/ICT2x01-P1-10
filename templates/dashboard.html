@@ -9,6 +9,7 @@ var test = function() {
 	var today = new Date();
 	var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 	var cmd = {{command}};
+	alert(cmd)
 	var cmd_to_str = JSON.stringify(cmd);
 	var cmd_split = cmd_to_str.split("");
 
@@ -30,7 +31,14 @@ var ckpoint = function() {
     var checkpoint = JSON.stringify(a);
     document.getElementById("ckpoint").innerHTML = checkpoint + " Checkpoint Captured!"
 }
-setInterval(ckpoint,5000)
+var obs_count = function() {
+    var a = {{distance}};
+    var obs = JSON.stringify(a);
+    document.getElementById("obs_count").innerHTML =  obs + " Obstacle Detacted!!"
+}
+setInterval(ckpoint,5000);
+setInterval(obs_count,5000);
+
     </script>
 </head>
 <!-- <script src="static/js/dashboard.js"></script> -->
@@ -59,44 +67,9 @@ setInterval(ckpoint,5000)
     <div class="row">
         <div class="col">
             <div class="row">
-                <div><h1>IR Sensor</h1></div>
-                <div id="tester1" style="width:600px;height:250px;"></div>
-                <script>
+                <div><h1>Obstacle</h1></div>
+                <div id="obs_counter" style="width:600px;height:250px;"><h1 id="obs_count"></h1></div>
 
-                function rand() {
-    return Math.random();
-    }
-Plotly.newPlot('tester1', [{
-    y: [1,2,3].map(rand),
-    mode: 'lines',
-    line: {color: 'black'}
-}]);
-var cnt = 0;
-
-var interval = setInterval(function() {
-
-    Plotly.extendTraces('tester1', {
-        y: [[rand()]]
-    }, [0])
-
-    if(++cnt === 100) clearInterval(interval);
-}, 300);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </script>
             </div>
 
         </div>
@@ -123,6 +96,7 @@ var interval = setInterval(function() {
 
     if(++cnt === 100) clearInterval(interval);
 }, 300);
+
 
 
 

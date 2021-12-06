@@ -10,27 +10,25 @@
     <script src="static/js/en.js"></script>
     <script src="static/js/javascript_compressed.js"></script>
     <script src="static/js/python_compressed.js"></script>
-    <style type="text/css">
-                            .car_frame {
-                                width: 600px;
-                                height: 500px;
-                                background: #eee;
-                                overflow: hidden;
-                                position: relative;
-                                margin:auto
-                            }
+    <style>
+        .car_frame {
+            width: 600px;
+            height: 500px;
+            background: url('static/img/map.png');
+            overflow: hidden;
+            position: relative;
+            margin:auto;
+            border: solid grey;
+        }
 
-                            .car {
-                                width: 200px;
-                                height: 100px;
-                                background: url('static/car.png') no-repeat center;
-                                background-size: cover;
-                                position: absolute;
+        .car {
+            width: 100px;
+            height: 50px;
+            background: url('static/img/car.png') no-repeat center;
+            background-size: cover;
+            position: absolute;
 
-                            }
-
-
-
+        }
     </style>
 </head>
 <body>
@@ -51,136 +49,119 @@
                         <block type="turn_right"></block>
                     </xml>
                     <script>
-                        //add new block
-Blockly.Blocks['move_forward'] = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField("move forward");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(20);
-        this.setTooltip('');
-        this.setHelpUrl('http://www.example.com/');
-    }
-};
-Blockly.Python['move_forward'] = function (block) {
-    // TODO: Assemble JavaScript into code variable.
-    var code = "1";
-    return code;
-};
+                        //add new blocks
+                        Blockly.Blocks['move_forward'] = {
+                            init: function() {
+                                this.appendDummyInput()
+                                    .appendField("move forward");
+                                this.setPreviousStatement(true, null);
+                                this.setNextStatement(true, null);
+                                this.setColour(20);
+                            }
+                        };
 
-Blockly.Blocks['move_backward'] = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField("move backward");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(65);
-        this.setTooltip('');
-        this.setHelpUrl('http://www.example.com/');
-    }
-};
-Blockly.Python['move_backward'] = function (block) {
-    // TODO: Assemble JavaScript into code variable.
-    var code = "2";
-    return code;
-};
+                        Blockly.JavaScript['move_forward'] = function(block) {
+                            var code = "commands = commands.concat('1');\n"; //forward code
+                            return code;
+                        };
 
-Blockly.Blocks['turn_left'] = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField("turn left");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(210);
-        this.setTooltip('');
-        this.setHelpUrl('http://www.example.com/');
-    }
-};
-Blockly.Python['turn_left'] = function (block) {
-    // TODO: Assemble JavaScript into code variable.
-    var code = "3";
-    return code;
-};
+                        Blockly.Blocks['move_backward'] = {
+                            init: function() {
+                                this.appendDummyInput()
+                                    .appendField("move backward");
+                                this.setPreviousStatement(true, null);
+                                this.setNextStatement(true, null);
+                                this.setColour(65);
+                            }
+                        };
+                        Blockly.JavaScript['move_backward'] = function(block) {
+                            var code = "commands = commands.concat('2');\n"; //backward code
+                            return code;
+                        };
 
-Blockly.Blocks['turn_right'] = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField("turn right");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(160);
-        this.setTooltip('');
-        this.setHelpUrl('http://www.example.com/');
-    }
-};
-Blockly.Python['turn_right'] = function (block) {
-    // TODO: Assemble JavaScript into code variable.
-    var code = "4";
-    return code;
-};
-var workspace = Blockly.inject('blocklyDiv',
-    {toolbox: document.getElementById('toolbox')});
+                        Blockly.Blocks['turn_left'] = {
+                            init: function() {
+                                this.appendDummyInput()
+                                    .appendField("turn left");
+                                this.setPreviousStatement(true, null);
+                                this.setNextStatement(true, null);
+                                this.setColour(210);
+                            }
+                        };
+                        Blockly.JavaScript['turn_left'] = function(block) {
+                            var code = "commands = commands.concat('3');\n"; //turn left code
+                            return code;
+                        };
+
+                        Blockly.Blocks['turn_right'] = {
+                            init: function() {
+                                this.appendDummyInput()
+                                    .appendField("turn right");
+                                this.setPreviousStatement(true, null);
+                                this.setNextStatement(true, null);
+                                this.setColour(160);
+                            }
+                        };
+                        Blockly.JavaScript['turn_right'] = function(block) {
+                            var code = "commands = commands.concat('4');\n"; //turn right code
+                            return code;
+                        };
+                        var workspace = Blockly.inject('blocklyDiv',
+                            {toolbox: document.getElementById('toolbox')});
 
 
-function myUpdateFunction(event) {
-    document.getElementById('textarea').value = Blockly.JavaScript.workspaceToCode(workspace);
-}
+                        function myUpdateFunction(event) {
+                            document.getElementById('textarea').value = Blockly.JavaScript.workspaceToCode(workspace);
+                        }
+                        workspace.addChangeListener(myUpdateFunction);
 
-workspace.addChangeListener(myUpdateFunction);
+                        var run = function() {
+                            Blockly.JavaScript.addReservedWords('code');
+                            var code = Blockly.JavaScript.workspaceToCode(workspace);
+                            var codestr = "commands = '';\n" + code;
+                            var codecmds = eval(codestr)
+                            var test = document.getElementById("test").value;
 
+                            var data = {"start": test, "data": codecmds}
+                            alert(codecmds)
 
-var run = function () {
-    Blockly.Python.addReservedWords('code');
-    var code = Blockly.Python.workspaceToCode(workspace);
-    var test = document.getElementById("test").value;
+                            var x_axis = 0;
+                            var y_axis = 0;
+                            var car_movement = JSON.stringify(codecmds);
+                            let numArray = num => Number(num);
+                            var car_split = Array.from(String(code), numArray);
 
-    // now what do you do want to do with code...?
-    alert("Command Code"+code+"Start"+test);
-    var data = {"start": test, "data": code}
+                            $.ajax({
+                                type: 'POST',
+                                contentType: 'application/json',
+                                url: '/play',
+                                dataType : 'json',
+                                data : JSON.stringify(data),
+                                success : (data) => {
+                                    console.log('success')
+                                },
+                                error : (data) => {
+                                    console.log('failure')
+                                }
+                            });
 
-    var x_axis = 0;
-    var y_axis = 0;
-    var car_movement = JSON.stringify(code);
-    let numArray = num => Number(num);
-    var car_split = Array.from(String(code), numArray);
-    //alert(car_split.length)
+                            for (var i = 0; i < car_split.length; i++) {
+                                if (car_split[i] == 1) { //forward
+                                    y_axis = y_axis + 60;
+                                    document.getElementById('car').style.marginLeft = y_axis + 'px';
+                                } else if (car_split[i] == 2) { //backward
+                                    y_axis = y_axis - 60;
+                                    document.getElementById('car').style.marginLeft = y_axis + 'px';
+                                } else if (car_split[i] == 3) { //turn left
+                                    x_axis = x_axis - 40;
+                                    $("#car").css({"transform": "translate(" + x_axis + "px," + y_axis + "px) rotate(90deg)"});
+                                } else if (car_split[i] == 4) { //turn right
+                                    x_axis = x_axis + 100;
+                                    $("#car").css({"transform": "translate(" + x_axis + "px," + y_axis + "px)"});
 
-    $.ajax({
-        type: 'POST',
-        contentType: 'application/json',
-        url: '/play',
-        dataType: 'json',
-        data: JSON.stringify(data),
-        success: (data) => {
-            console.log('success')
-        },
-        error: (data) => {
-            console.log('failure')
-        }
-    });
-
-
-    for (var i = 0; i < car_split.length; i++) {
-
-        if (car_split[i] == 1) { //forward
-            y_axis = y_axis + 60;
-            document.getElementById('car').style.marginLeft = y_axis + 'px';
-        } else if (car_split[i] == 2) { //backward
-            y_axis = y_axis - 60;
-            document.getElementById('car').style.marginLeft = y_axis + 'px';
-        } else if (car_split[i] == 3) { //turn left
-            x_axis = x_axis + 60;
-            $("#car").css({"transform": "translate(" + x_axis + "px," + y_axis + "px) rotate(-90deg)"});
-        } else if (car_split[i] == 4) { //turn right
-            x_axis = x_axis + 60;
-            $("#car").css({"transform": "translate(" + x_axis + "px," + y_axis + "px)  rotate(90deg)"});
-
-        }
-    }
-}
-
-
+                                }
+                            }
+                        }
 
 
                     </script>
@@ -195,26 +176,26 @@ var run = function () {
             <br>
             <div class="row">
                 <div class="car_frame">
-                    <!--<div class="car"></div> -->
-                    <img src="static/car.png" id="car" style="width: 200px; height: 100px; position: relative; offset-rotate: auto;">
+                    <div class="car" id="car"></div>
+                    <!--<img src="static/img/car.png" id="car" style="width: 50px; height: 25px; position: absolute; offset-rotate: auto;">-->
                 </div>
-
-            </div>
-            <br>
-            <div class="row">
-
             </div>
         </div>
+        <br>
+        <div class="row">
 
-    </div>
-    <div class="row">
-        <div class="col" style="display: flex; justify-content: center; align-items: center;">
-            <button class="btn btn-success" id="test" value="1" onclick="run()" style="width: 250px;">Send to Robot
-            </button>
         </div>
-        <div class="col"></div>
-
     </div>
+
+</div>
+<div class="row">
+    <div class="col" style="display: flex; justify-content: center; align-items: center;">
+        <button class="btn btn-success" id="test" value="1" onclick="run()" style="width: 250px;">Send to Robot
+        </button>
+    </div>
+    <div class="col"></div>
+
+</div>
 </div>
 </body>
 
