@@ -45,7 +45,6 @@ Python-Decouple
 
 ```
 pip install -r requirements.txt
-pip install Flask
 ```
 
 ### Execution
@@ -90,6 +89,8 @@ Development branch consists of codes that may not be properly functioning. It ma
 
 For the system state diagram, the end screen has been removed and replaced with a landing page that has a tutorial video. The end screen is removed because coding requires a lot of testing, and an end screen is disruptive for the process. Users can instead see their score on the dashboard.
 
+### System State Tests
+[![system state tests](https://img.youtube.com/vi/z7zt9qH80oU/0.jpg)](https://www.youtube.com/watch?v=z7zt9qH80oU)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
