@@ -73,6 +73,12 @@ For the system state diagram, the end screen has been removed and replaced with 
 <!-- whitebox testing -->
 ## Whitebox Testing
 
+
+
+https://user-images.githubusercontent.com/19475364/144796432-a0c29c5f-f8a9-49cf-94ec-7ccb858bb24b.mp4
+
+
+
 ## Members
 
 Ng Jing Yong - 2002478@sit.singaporetech.edu.sg
