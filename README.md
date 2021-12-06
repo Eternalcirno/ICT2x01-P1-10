@@ -40,7 +40,8 @@ pip install -r requirements.txt
 ```
 
 ### Execution
-Both portal and car need to be connected to the same mobile hotspot. A .env file also needs to be created with a username and hashed password to faciliate admin login
+Both portal and car need to be connected to the same mobile hotspot. A .env file also needs to be created with a username and password hashed with SHA256 to faciliate admin login
+![image](https://user-images.githubusercontent.com/71884484/144850728-6b6e84b7-6160-4704-adc4-c0f732dc0232.png)
 1. Power up the car
 2. Run portal.py
 4. Car should be connected within 30 seconds
