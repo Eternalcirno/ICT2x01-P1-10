@@ -68,7 +68,7 @@ The master branch will be storing the final functioning codes. All developer’s
 *Development branch:*
 Development branch consists of codes that may not be properly functioning. It may be unstable or crashes. 
 
-*Features branches:* Team members created different features branch from and merged it to development branch after completion. Before making changes on feature branches, members pulled changes to ensure all features branches are up to date. 
+*Features branches:* Team members created different feature branches and merged it to development branch after completion. Before making changes on feature branches, members pulled changes to ensure all features branches are up to date. 
 
 **Below is the mock-up of the team's workflow :**
 ![Class Diagram - Page 4 (2)](https://user-images.githubusercontent.com/51218376/144881081-1cdb40e6-7b0d-4a78-8c97-37e6b160d7bf.png)
