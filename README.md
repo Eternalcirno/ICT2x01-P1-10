@@ -29,9 +29,9 @@
 ### Dependencies
 Flask
 
-Dotenv
+Python-Dotenv
 
-Decouple
+Python-Decouple
 
 ### Installation
 
@@ -73,9 +73,29 @@ For the system state diagram, the end screen has been removed and replaced with 
 <!-- whitebox testing -->
 ## Whitebox Testing
 
-
+### Admin Authentication - Test Case
 
 https://user-images.githubusercontent.com/19475364/144796432-a0c29c5f-f8a9-49cf-94ec-7ccb858bb24b.mp4
+
+The video above shows all the test cases for admin authentication. In total, there are 12 test cases that was being run. We use the built in unit testing framework that python has provided.
+
+The list of test cases includes:
+* testEmptyPass
+* testEmptyUser
+* testBan
+* testBadCreds
+* testUnBan
+* testLogin
+* testEmptyNewPass
+* testEmptyConfNewPass
+* testEmptyOldPass
+* testWrongOldPass
+* testDiffPass
+* testPol
+* testChange
+
+### Coverage Statistic
+
 
 
 
