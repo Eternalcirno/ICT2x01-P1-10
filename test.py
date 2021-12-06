@@ -38,6 +38,9 @@ class authTest(unittest.TestCase):
     def testEmptyNewPass(self):
         self.assertRaisesRegex(NameError, "^New password cannot be empty$" , self.auth.change, "admin", "", "a", "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb")
 
+    def testSamePass(self):
+        self.assertRaisesRegex(NameError, "^New password cannot be the same as old password$" , self.auth.change, "admin", "admin", "admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918")
+
     def testEmptyConfNewPass(self):
         self.assertRaisesRegex(NameError, "^Confirm new password cannot be empty$" , self.auth.change, "admin", "a", "", "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb")
 
@@ -55,7 +58,7 @@ class authTest(unittest.TestCase):
 
     def testChange(self):
         self.assertEqual(self.auth.change("admin", "Aaa12*", "Aaa12*","7337ead11dd6981dd6448d27f24cc687bf5d27fae506ab3f4ee80f8ac101f7fb"), 0)
-    
+
     def tearDown(self) -> None:
         return super().tearDown()
 
