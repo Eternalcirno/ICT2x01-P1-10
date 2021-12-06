@@ -83,9 +83,10 @@ def layout():
 def play():
     if request.method == "POST":
         cmds = request.get_json()['data']
-        #start = request.get_json()['start']
-        #cmdstr = start + cmds
-        db.update_commands(cmds)
+        start = request.get_json()['start']
+        cmdstr = start + cmds
+        print(cmds)
+        db.update_commands(cmdstr)
 
     return render_template("./play.html")
 
