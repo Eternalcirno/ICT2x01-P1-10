@@ -13,15 +13,19 @@
             <hr>
             <form method="POST" action="/changepass">
                 <label for="oldpass">Old Password:</label>
-                <input type="password" name="oldpass"/><br>
+                <input class="m-1" type="password" name="oldpass"/><br>
                 <label for="oldpass">New Password:</label>
-                <input type="password" name="newpass"/><br>
+                <input class="m-1" type="password" name="newpass"/><br>
                 <label for="oldpass">Confirm New Password:</label>
-                <input type="password" name="cfmnewpass"/><br>
-                <input type="submit" value="Submit"/>
+                <input class="m-1" type="password" name="cfmnewpass"/><br>
+                <input class="btn btn-success" type="submit" value="Submit"/>
             </form>
         </div>
+
+
         <div class="row">
+            <h1 class="mt-4">Car Settings</h1>
+            <hr>
             <form action="/changemaxspeed" method="POST">
                 <label for="maxspeed" class="form-label">Select maximum speed:</label>
     
@@ -35,9 +39,11 @@
         </div>
 
         <div class="row">
+            <h1 class="mt-4">Portal Settings</h1>
+            <hr>
             <div class="form-check form-switch">
+                <label class="form-check-label" for="Tutorial">Toggle Tutorial Mode</label>
                 <input class="form-check-input" type="checkbox" id="tutorial" checked content="on">
-                <label class="form-check-label" for="Tutorial">Toggle Tutorial Mode</label> <!-- {{tutStatus}} -->
             </div>
         </div>
 
@@ -47,8 +53,8 @@
             <div class="row">
                 <div class="col">
             
-                  <h1>Insert Challenge Map</h1>
-                  <hr>
+                  <h6 class="mt-3 fw-bold">Insert Challenge Map</h6>
+                  <hr class="p-0 m-0 mb-2">
             
                   <form action="/uploadmapimage" method="POST" enctype="multipart/form-data">
 
