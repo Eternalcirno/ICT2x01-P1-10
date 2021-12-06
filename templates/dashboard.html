@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %} {% block title %} Homepage {% endblock %} {% block page_title %} Home {% endblock %} {% block body %}
+<html lang="en">
+<head>
+    <script src="static/js/plotly.min.js"></script>
+    <script>
+
+var test = function() {
+	var today = new Date();
+	var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+	var cmd = {{command}};
+	var cmd_to_str = JSON.stringify(cmd);
+	var cmd_split = cmd_to_str.split("");
+	//alert(cmd_split)
+
+	for (var i=2; i < cmd_split.length; i++) {
+	    if (cmd_split[i] == 1) {
+	        document.getElementById("running-commands").innerHTML += time + ": Inserted FORWARD <br>"
+	    } else if (cmd_split[i] == 2) {
+	        document.getElementById("running-commands").innerHTML += time + ": Inserted BACKWARD <br>"
+	    } else if (cmd_split[i] == 3) {
+	        document.getElementById("running-commands").innerHTML += time + ": Inserted LEFT <br>"
+	    } else if (cmd_split[i] == 4) {
+	        document.getElementById("running-commands").innerHTML += time + ": Inserted RIGHT <br>"
+	    }
+	}
+}
+
+var ckpoint = function() {
+    var a = {{line}};
+    var checkpoint = JSON.stringify(a);
+    document.getElementById("ckpoint").innerHTML = checkpoint + " Checkpoint Captured!"
+}
+var obs_count = function() {
+    var a = {{distance}};
+    var obs = JSON.stringify(a);
+    document.getElementById("obs_count").innerHTML =  obs + " Obstacle Detected!!"
+}
+setInterval(ckpoint,5000);
+setInterval(obs_count,5000);
+
+    </script>
+</head>
+<!-- <script src="static/js/dashboard.js"></script> -->
+<body onload="test()">
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <h1>Running Commands</h1>
+                <div class="card" style="height: 200px; width: 600px;">
+                    <div class="card-body" id="running-commands">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div><h1>Checkpoint</h1></div>
+                <div id="counter" style="width:600px;height:250px;"><h1 id="ckpoint"></h1></div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div><h1>Obstacle</h1></div>
+                <div id="obs_counter" style="width:600px;height:250px;"><h1 id="obs_count"></h1></div>
+
+            </div>
+
+        </div>
+        <div class="col">
+            <div class="row">
+                <div><h1>Speed</h1></div>
+                <div id="tester3" style="width:600px;height:250px;"></div>
+                <script>
+                function rand() {
+    return Math.random();
+    }
+Plotly.newPlot('tester3', [{
+    y: [1,2,3].map(rand),
+    mode: 'lines',
+    line: {color: 'black'}
+}]);
+var cnt = 0;
+
+var interval = setInterval(function() {
+
+    Plotly.extendTraces('tester3', {
+        y: [[rand()]]
+    }, [0])
+
+    if(++cnt === 100) clearInterval(interval);
+}, 300);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </script>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>
+{% endblock %}
