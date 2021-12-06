@@ -16,9 +16,6 @@
     <br />
     <br />
     <a href="https://www.youtube.com/watch?v=wLY3dIGv30M">View Demo</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
-    ·
   </p>
 </div>
 
