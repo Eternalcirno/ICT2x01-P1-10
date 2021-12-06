@@ -1,6 +1,6 @@
 
 <div id="top"></div>
-<!-- PROJECT LOGO -->
+<!-- PROJECT LOGO r-->
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
@@ -12,179 +12,173 @@
   <p align="center">
     ICT2x01-P1-10 Project
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Eternalcirno/ICT2x01-P1-10#readme"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://www.youtube.com/watch?v=wLY3dIGv30M">View Demo</a>
   </p>
 </div>
 
+<!-- How to run-->
+## Introduction 
+Crush Gear 2000 is a fun and interactive game where users can remotely connect and control the car using web portal. Users will have to navigate the car through an obstacle course. This project will be targeted at primary school students, which will encourage their problem-solving and critical-thinking skills.
+Other than the game, users will be able view sensor data from the car through the web portal. This allows users to see and understand what the car is sensing and how it is reacting. This will be beneficial for troubleshooting their navigation and gaining a better understanding on how a robot works.
 
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+## How to Run
+*To run at a virtual enviroment* 
+1) Open a terminal 
+2) python3 -m venv venv 
+3) .ven/bin/active 
+4) pip install Flask 
+5) python portal.py 
 
 
+### Dependencies
+Flask
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+Python-Dotenv
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email`, `email_client`, `project_title`, `project_description`
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-### Built With
-
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+Python-Decouple
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+```
+pip install -r requirements.txt
+pip install Flask
+```
+
+### Execution
+Both portal and car need to be connected to the same mobile hotspot. A .env file also needs to be created with a username and password hashed with SHA256 to faciliate admin login
+![image](https://user-images.githubusercontent.com/71884484/144850728-6b6e84b7-6160-4704-adc4-c0f732dc0232.png)
+1. Power up the car
+2. Run portal.py
+4. Car should be connected within 30 seconds
+5. Access website: http://127.0.0.1:5000
+6. Code and start the car!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- development workflow -->
+## Development Workflow
+***Branch description*** 
+
+*Master Branch:*
+The master branch will be storing the final functioning codes. All developer’s work will be meagered together. 
+
+*Development branch:*
+Development branch consists of codes that may not be properly functioning. It may be unstable or crashes. 
+
+*Features branches:* Team members created different features branch from and merged it to development branch after completion. Before making changes on feature branches, members pulled changes to ensure all features branches are up to date. 
+
+**Below is the mock-up of the team's workflow :**
+![Class Diagram - Page 4 (2)](https://user-images.githubusercontent.com/51218376/144881081-1cdb40e6-7b0d-4a78-8c97-37e6b160d7bf.png)
 
 
-<!-- USAGE EXAMPLES -->
-## Usage
+<!-- UAT -->
+## UAT
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+### Use Case Diagram
+<div align='center'>
+<img src="images/UCD.png" alt="UCD" height=70% width = 70%>
+</div>
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+### System State Diagram
+<div align='center'>
+<img src="images/SSD.png" alt="SSD" height=70% width = 70%>
+</div>
+
+For the system state diagram, the end screen has been removed and replaced with a landing page that has a tutorial video. The end screen is removed because coding requires a lot of testing, and an end screen is disruptive for the process. Users can instead see their score on the dashboard.
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- whitebox testing -->
+## Whitebox Testing
+
+### Admin Authentication - Test Case
 
 
-<!-- ROADMAP -->
-## Roadmap
+https://user-images.githubusercontent.com/19475364/144821629-be00601c-c1ff-4526-9c3c-f18b26cd86c6.mp4
 
-- [] Feature 1
-- [] Feature 2
-- [] Feature 3
-    - [] Nested Feature
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+The video above shows all the test cases for admin authentication. In total, there are 14 test cases that was being run. We use the built in unit testing framework that python has provided. The test suite file is located in the root directory and can be run from the IDE itself.
+
+The list of test cases includes:
+* testEmptyPass
+* testEmptyUser
+* testBan
+* testBadCreds
+* testUnBan
+* testLogin
+* testEmptyNewPass
+* testEmptyConfNewPass
+* testEmptyOldPass
+* testWrongOldPass
+* testSamePass
+* testDiffPass
+* testPol
+* testChange
+
+### Coverage Statistic
+
+#### Login
+
+![wbcov (2)](https://user-images.githubusercontent.com/19475364/144804420-6a51f2e1-2ba1-4b37-8d80-46d43793c817.jpg)
+
+Total statement = 16
+
+testUnBan = 3/16
+
+testEmptyUser = 2/16
+
+testEmptyPass = 2/16
+
+testLogin = 3/16
+
+testBadCreds = 3/16
+
+testBan = 3/16
+
+#### Change Password
+![wbcov2](https://user-images.githubusercontent.com/19475364/144811949-a1899c8a-6892-4c74-8614-7887815e5655.jpg)
+
+Total statement = 19
+
+testSamePass = 2/19
+
+testEmptyNewPass = 2/19
+
+testEmptyConfNewPass = 2/19
+
+testEmptyOldPass = 2/19
+
+testWrongOldPass = 2/19
+
+testDiffPass = 2/19
+
+testPol =  2/19
+
+testChange = 5/19
+
+
+
+
+
+
+## Members
+
+Ng Jing Yong - 2002478@sit.singaporetech.edu.sg
+
+Ng Jing Fang - 2002855@sit.singaporetech.edu.sg
+
+Mohamad Lutfee - 2001369@sit.singaporetech.edu.sg
+
+Seah Yuan Shengh - 2000532@sit.singaporetech.edu.sg
+
+Yang Yuqin - 2002620@sit.singaporetech.edu.sg
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
