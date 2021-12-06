@@ -75,9 +75,11 @@ For the system state diagram, the end screen has been removed and replaced with 
 
 ### Admin Authentication - Test Case
 
-https://user-images.githubusercontent.com/19475364/144796432-a0c29c5f-f8a9-49cf-94ec-7ccb858bb24b.mp4
 
-The video above shows all the test cases for admin authentication. In total, there are 13 test cases that was being run. We use the built in unit testing framework that python has provided.
+https://user-images.githubusercontent.com/19475364/144821629-be00601c-c1ff-4526-9c3c-f18b26cd86c6.mp4
+
+
+The video above shows all the test cases for admin authentication. In total, there are 14 test cases that was being run. We use the built in unit testing framework that python has provided.
 
 The list of test cases includes:
 * testEmptyPass
@@ -90,6 +92,7 @@ The list of test cases includes:
 * testEmptyConfNewPass
 * testEmptyOldPass
 * testWrongOldPass
+* testSamePass
 * testDiffPass
 * testPol
 * testChange
@@ -116,6 +119,26 @@ testBan = 3/16
 
 #### Change Password
 ![wbcov2](https://user-images.githubusercontent.com/19475364/144811949-a1899c8a-6892-4c74-8614-7887815e5655.jpg)
+
+Total statement = 19
+
+testSamePass = 2/19
+
+testEmptyNewPass = 2/19
+
+testEmptyConfNewPass = 2/19
+
+testEmptyOldPass = 2/19
+
+testWrongOldPass = 2/19
+
+testDiffPass = 2/19
+
+testPol =  2/19
+
+testChange = 5/19
+
+
 
 
 
