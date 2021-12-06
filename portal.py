@@ -108,7 +108,7 @@ def login():
     try:
         a.login(user,password)
         flash("Successfully logged in")
-        resp = make_response(render_template("./panel.html"))
+        resp = make_response(render_template("./adminsettings.html"))
         session["auth"] = "1"
         return resp
     except NameError as e:
