@@ -43,7 +43,7 @@ class Auth:
         holdpass = hashlib.sha256(oldpass.encode('utf-8')).hexdigest()
         a = self.passwd
         if(oldpass == newpass):
-            raise NameError("Old password cannot be the same as new password")
+            raise NameError("New password cannot be the same as old password")
         if(oldpass == ""):
             raise NameError("Old password cannot be empty")
         if(newpass == ""):
