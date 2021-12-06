@@ -49,7 +49,7 @@
                         <block type="turn_right"></block>
                     </xml>
                     <script>
-                        //add new block
+                        //add new blocks
                         Blockly.Blocks['move_forward'] = {
                             init: function() {
                                 this.appendDummyInput()
@@ -57,13 +57,11 @@
                                 this.setPreviousStatement(true, null);
                                 this.setNextStatement(true, null);
                                 this.setColour(20);
-                                this.setTooltip('');
-                                this.setHelpUrl('http://www.example.com/');
                             }
                         };
+
                         Blockly.JavaScript['move_forward'] = function(block) {
-                            // TODO: Assemble JavaScript into code variable.
-                            var code = "commands = commands.concat('1');\n";
+                            var code = "commands = commands.concat('1');\n"; //forward code
                             return code;
                         };
 
@@ -74,13 +72,10 @@
                                 this.setPreviousStatement(true, null);
                                 this.setNextStatement(true, null);
                                 this.setColour(65);
-                                this.setTooltip('');
-                                this.setHelpUrl('http://www.example.com/');
                             }
                         };
                         Blockly.JavaScript['move_backward'] = function(block) {
-                            // TODO: Assemble JavaScript into code variable.
-                            var code = "commands = commands.concat('2');\n";
+                            var code = "commands = commands.concat('2');\n"; //backward code
                             return code;
                         };
 
@@ -91,13 +86,10 @@
                                 this.setPreviousStatement(true, null);
                                 this.setNextStatement(true, null);
                                 this.setColour(210);
-                                this.setTooltip('');
-                                this.setHelpUrl('http://www.example.com/');
                             }
                         };
                         Blockly.JavaScript['turn_left'] = function(block) {
-                            // TODO: Assemble JavaScript into code variable.
-                            var code = "commands = commands.concat('3');\n";
+                            var code = "commands = commands.concat('3');\n"; //turn left code
                             return code;
                         };
 
@@ -108,13 +100,10 @@
                                 this.setPreviousStatement(true, null);
                                 this.setNextStatement(true, null);
                                 this.setColour(160);
-                                this.setTooltip('');
-                                this.setHelpUrl('http://www.example.com/');
                             }
                         };
                         Blockly.JavaScript['turn_right'] = function(block) {
-                            // TODO: Assemble JavaScript into code variable.
-                            var code = "commands = commands.concat('4');\n";
+                            var code = "commands = commands.concat('4');\n"; //turn right code
                             return code;
                         };
                         var workspace = Blockly.inject('blocklyDiv',
