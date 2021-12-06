@@ -24,6 +24,25 @@
 </div>
 
 <!-- How to run-->
+
+![image](https://user-images.githubusercontent.com/51218376/144853854-0d6ec4ee-1463-49ce-8a31-c812531a0d07.png)
+
+## Introduction 
+Crush Gear 2000 is a fun and interactive game where users can remotely connect and control the car using web portal. Users will have to navigate the car through an obstacle course. This project will be targeted at primary school students, which will encourage their problem-solving and critical-thinking skills.
+Other than the game, users will be able view sensor data from the car through the web portal. This allows users to see and understand what the car is sensing and how it is reacting. This will be beneficial for troubleshooting their navigation and gaining a better understanding on how a robot works.
+## WorkFlow 
+Branch description 
+Master Branch
+The master branch will be storing the final functioning codes. All developer’s work will be meagered together. 
+Development branch 
+Development branch consists of codes that may not be properly functioning. It may be unstable and crashes. 
+Features branches 
+Team members created different features branch from and merged it to development branch after completion. Before making changes on feature branches, members pulled changes to ensure all features branches are up to date. 
+![image](https://user-images.githubusercontent.com/51218376/144854045-dbc2cacf-52cd-4e7f-bc75-3c8a26c53ceb.png)
+Below is the mock-up of the team's workflow : 
+![image](https://user-images.githubusercontent.com/51218376/144854144-8fd77d34-efad-4e80-88d0-f911d59f690a.png)
+
+Below is the mock-up of the team's workflow : 
 ## How to Run
 
 ### Dependencies
