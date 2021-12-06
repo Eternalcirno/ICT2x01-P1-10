@@ -141,5 +141,4 @@ def update_commands(commands):
     conn.cur.execute("UPDATE commands_table SET val=? WHERE rowid=1", (commands,))
     conn.commit()
     conn.close()
-    conn.close()
 
