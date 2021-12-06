@@ -96,6 +96,22 @@ The list of test cases includes:
 
 ### Coverage Statistic
 
+![wbcov (2)](https://user-images.githubusercontent.com/19475364/144804420-6a51f2e1-2ba1-4b37-8d80-46d43793c817.jpg)
+
+Total statement = 16
+
+testUnBan = 3/16
+
+testEmptyUser = 2/16
+
+testEmptyPass = 2/16
+
+testLogin = 3/16
+
+testBadCreds = 3/16
+
+testBan = 3/16
+
 
 
 
